@@ -111,3 +111,13 @@
   font-weight: 500;
   color: rgba(0, 0, 0, 0.7);
 }
+
+.join-now {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.join-now > a {
+  color: #0a66c2;
+  font-weight: 500;
+}

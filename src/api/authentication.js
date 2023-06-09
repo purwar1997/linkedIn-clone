@@ -7,7 +7,7 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 
-export const signup = async credentials => {
+export const signupAPI = async credentials => {
   const { email, password } = credentials;
 
   if (!email) {
@@ -18,12 +18,16 @@ export const signup = async credentials => {
     throw new Error('Please enter a password');
   }
 
+  if (password.length < 8) {
+    throw new Error('Password must be atleast 8 characters long');
+  }
+
   const res = await createUserWithEmailAndPassword(auth, email, password);
   const user = res.user;
   return user;
 };
 
-export const login = async credentials => {
+export const loginAPI = async credentials => {
   const { email, password } = credentials;
 
   if (!email) {
@@ -39,7 +43,11 @@ export const login = async credentials => {
   return user;
 };
 
-export const signInWithGoogle = async () => {
+export const logoutAPI = async () => {
+  await signOut();
+};
+
+export const googleSignInAPI = async () => {
   const provider = new GoogleAuthProvider();
 
   const result = await signInWithPopup(auth, provider);
