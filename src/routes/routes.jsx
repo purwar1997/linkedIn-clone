@@ -3,7 +3,7 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 import Login from '../pages/Login';
 
 const router = createBrowserRouter(
-  createRoutesFromElements(<Route path='/login' element={<Login />} />)
+  createRoutesFromElements(<Route path='/' element={<Login />} />)
 );
 
 export default router;
