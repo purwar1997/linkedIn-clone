@@ -18,8 +18,8 @@ export const signupAPI = async credentials => {
     throw new Error('Please enter a password');
   }
 
-  if (password.length < 8) {
-    throw new Error('Password must be atleast 8 characters long');
+  if (password.length < 6) {
+    throw new Error('Password must be atleast 6 characters long');
   }
 
   const res = await createUserWithEmailAndPassword(auth, email, password);
