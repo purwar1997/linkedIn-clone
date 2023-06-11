@@ -3,8 +3,8 @@ import { AiOutlineSearch, AiFillHome } from 'react-icons/ai';
 import { HiUsers } from 'react-icons/hi';
 import { BsBriefcaseFill } from 'react-icons/bs';
 import { MdMessage, MdNotifications } from 'react-icons/md';
-import TopbarLogo from '../assets/topbarLogo.png';
-import '../styles/Topbar.css';
+import TopbarLogo from '../../assets/topbarLogo.png';
+import './index.css';
 
 export default function Topbar() {
   return (
@@ -13,9 +13,10 @@ export default function Topbar() {
         <img className='topbar-logo' src={TopbarLogo} alt='topbar-logo' />
       </Link>
 
-      {/* <form>
+      <form className='search-form'>
         <input type='search' name='search' placeholder='Search' />
-      </form> */}
+        <AiOutlineSearch className='search-icon' />
+      </form>
 
       <div className='react-icons'>
         <AiFillHome className='react-icon' />

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebase';
-import Loader from './Loader';
+import Loader from './Loader/index';
 
 export default function Authenticate({ children }) {
   const [loading, setLoading] = useState(true);

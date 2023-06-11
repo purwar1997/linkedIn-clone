@@ -1,0 +1,52 @@
+.topbar {
+  height: 60px;
+  background-color: #fff;
+  padding-inline: 100px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.topbar-logo {
+  width: 35px;
+  position: relative;
+  top: 1px;
+}
+
+.search-form {
+  flex: 1;
+  position: relative;
+}
+
+.search-form > input {
+  background-color: #eef3f8;
+  height: 36px;
+  width: 260px;
+  border: none;
+  border-radius: 4px;
+  padding-inline: 40px;
+  font-size: 14px;
+}
+
+.search-icon {
+  font-size: 17px;
+  position: absolute;
+  top: 10px;
+  left: 12px;
+}
+
+.react-icons {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.react-icon {
+  font-size: 25px;
+  color: #585858;
+}
+
+.react-icon:hover {
+  cursor: pointer;
+  color: #000;
+}

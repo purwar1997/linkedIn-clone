@@ -1,0 +1,18 @@
+.modal {
+  background-color: #fff;
+  width: 60%;
+  padding: 20px 25px;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1;
+}
+
+.cross-btn {
+  background-color: transparent;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
