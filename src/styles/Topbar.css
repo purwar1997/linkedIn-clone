@@ -1,0 +1,28 @@
+.topbar {
+  height: 60px;
+  background-color: #fff;
+  padding-inline: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar-logo {
+  width: 35px;
+}
+
+.react-icons {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.react-icon {
+  font-size: 25px;
+  color: #585858;
+}
+
+.react-icon:hover {
+  cursor: pointer;
+  color: #000;
+}
