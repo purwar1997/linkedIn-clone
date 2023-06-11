@@ -22,8 +22,8 @@ export const signupAPI = async credentials => {
     throw new Error('Password must be atleast 6 characters long');
   }
 
-  const res = await createUserWithEmailAndPassword(auth, email, password);
-  const user = res.user;
+  const response = await createUserWithEmailAndPassword(auth, email, password);
+  const user = response.user;
   return user;
 };
 
@@ -38,8 +38,8 @@ export const loginAPI = async credentials => {
     throw new Error('Please enter a password');
   }
 
-  const res = await signInWithEmailAndPassword(auth, email, password);
-  const user = res.user;
+  const response = await signInWithEmailAndPassword(auth, email, password);
+  const user = response.user;
   return user;
 };
 
@@ -50,10 +50,10 @@ export const logoutAPI = async () => {
 export const googleSignInAPI = async () => {
   const provider = new GoogleAuthProvider();
 
-  const result = await signInWithPopup(auth, provider);
-  const credential = GoogleAuthProvider.credentialFromResult(result);
+  const response = await signInWithPopup(auth, provider);
+  const credential = GoogleAuthProvider.credentialFromResult(response);
   const token = credential.accessToken;
-  const user = result.user;
+  const user = response.user;
 
   return { user, token };
 };

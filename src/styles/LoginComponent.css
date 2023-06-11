@@ -34,7 +34,7 @@
 .login-form input {
   width: 100%;
   height: 55px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   border: 1px solid rgba(0, 0, 0, 0.9);
   border-radius: 4px;
   font-size: 16px;
@@ -74,7 +74,7 @@
     left: 0px;
     height: 1px;
     width: 45%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.3);
   }
 
   &::after {
@@ -84,7 +84,7 @@
     right: 0px;
     height: 1px;
     width: 45%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -113,7 +113,7 @@
 }
 
 .join-now {
-  margin-top: 30px;
+  margin-top: 25px;
   text-align: center;
 }
 

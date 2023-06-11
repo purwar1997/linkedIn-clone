@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { googleSignInAPI, signupAPI } from '../api/authentication';
+import { signupAPI, googleSignInAPI } from '../api/authentication';
+import LinkedInLogo from '../assets/linkedInLogo.png';
 import googleIcon from '../assets/googleIcon.png';
 import '../styles/SignupComponent.css';
 
@@ -33,6 +34,10 @@ export default function SignupComponent() {
 
   return (
     <section className='signup-wrapper'>
+      <Link to='/'>
+        <img className='site-logo' src={LinkedInLogo} alt='linkedin-logo' />
+      </Link>
+
       <h1 className='heading'>Make the most of your professional life</h1>
 
       <div className='signup-container'>
