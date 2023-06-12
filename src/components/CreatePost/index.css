@@ -11,12 +11,12 @@
   padding-inline: 30px;
 }
 
-.profile-image {
+.user-image {
   width: 50px;
   border-radius: 50%;
 }
 
-.create-post-btn {
+.open-modal-btn {
   flex: 1;
   background-color: #fff;
   height: 50px;
@@ -29,7 +29,7 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
-.create-post-btn:hover {
+.open-modal-btn:hover {
   cursor: pointer;
   background-color: #ebebeb;
 }

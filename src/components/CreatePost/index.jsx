@@ -12,11 +12,12 @@ export default function CreatePost() {
   return (
     <>
       <div className='create-post'>
-        <img className='profile-image' src={topbarLogo} />
-        <button className='create-post-btn' onClick={openModal}>
+        <img className='user-image' src={topbarLogo} />
+        <button className='open-modal-btn' onClick={openModal}>
           Start a post
         </button>
       </div>
+
       {isModalOpen && <Modal closeModal={closeModal} />}
     </>
   );
