@@ -22,6 +22,7 @@ export default function Modal({ closeModal }) {
   const createPost = async () => {
     try {
       await createPostAPI(post.trim());
+      closeModal();
     } catch (err) {
       toast.error(err.message);
     }

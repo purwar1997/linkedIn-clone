@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginAPI, googleSignInAPI } from '../api/AuthAPI';
 import { toast } from 'react-toastify';
 import LinkedInLogo from '../assets/linkedInLogo.png';
@@ -8,6 +8,7 @@ import '../styles/LoginComponent.css';
 
 export default function LoginComponent() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -19,6 +20,7 @@ export default function LoginComponent() {
 
     try {
       await loginAPI(credentials);
+      navigate('/', { replace: true });
     } catch (err) {
       toast.error(err.message);
     }
@@ -27,6 +29,7 @@ export default function LoginComponent() {
   const signInWithGoogle = async () => {
     try {
       await googleSignInAPI();
+      navigate('/', { replace: true });
     } catch (err) {
       toast.error(err.message);
     }
