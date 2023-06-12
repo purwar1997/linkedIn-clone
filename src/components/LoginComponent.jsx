@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { loginAPI, googleSignInAPI } from '../api/authentication';
+import { loginAPI, googleSignInAPI } from '../api/AuthAPI';
 import { toast } from 'react-toastify';
 import LinkedInLogo from '../assets/linkedInLogo.png';
 import googleIcon from '../assets/googleIcon.png';
@@ -9,12 +9,12 @@ import '../styles/LoginComponent.css';
 export default function LoginComponent() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
 
-  function handleChange(event) {
+  const handleChange = event => {
     const { name, value } = event.target;
     setCredentials({ ...credentials, [name]: value });
-  }
+  };
 
-  async function login(event) {
+  const login = async event => {
     event.preventDefault();
 
     try {
@@ -22,15 +22,15 @@ export default function LoginComponent() {
     } catch (err) {
       toast.error(err.message);
     }
-  }
+  };
 
-  async function signInWithGoogle() {
+  const signInWithGoogle = async () => {
     try {
       await googleSignInAPI();
     } catch (err) {
       toast.error(err.message);
     }
-  }
+  };
 
   return (
     <section className='login-wrapper'>

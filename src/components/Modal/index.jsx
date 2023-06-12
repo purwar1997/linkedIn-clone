@@ -1,15 +1,11 @@
 import { useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
+import { toast } from 'react-toastify';
+import { createPostAPI } from '../../api/FirestoreApi';
 import './index.css';
 
 export default function Modal({ closeModal }) {
   const [post, setPost] = useState('');
-
-  function closePostModal(event) {
-    if (event.target === event.currentTarget) {
-      closeModal();
-    }
-  }
 
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
@@ -17,7 +13,19 @@ export default function Modal({ closeModal }) {
     }
   });
 
-  async function createPost() {}
+  const closePostModal = event => {
+    if (event.target === event.currentTarget) {
+      closeModal();
+    }
+  };
+
+  const createPost = async () => {
+    try {
+      await createPostAPI(post.trim());
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
 
   return (
     <div className='modal-background' onClick={closePostModal}>
@@ -39,7 +47,7 @@ export default function Modal({ closeModal }) {
         />
 
         <button
-          className={`post-btn ${post.length > 0 ? 'active' : ''}`}
+          className={`post-btn ${post.trim() !== '' ? 'active' : ''}`}
           onClick={createPost}
           disabled={post.trim() === ''}
         >

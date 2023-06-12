@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { signupAPI, googleSignInAPI } from '../api/authentication';
+import { signupAPI, googleSignInAPI } from '../api/AuthAPI';
 import LinkedInLogo from '../assets/linkedInLogo.png';
 import googleIcon from '../assets/googleIcon.png';
 import '../styles/SignupComponent.css';
@@ -9,12 +9,12 @@ import '../styles/SignupComponent.css';
 export default function SignupComponent() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
 
-  function handleChange(event) {
+  const handleChange = event => {
     const { name, value } = event.target;
     setCredentials({ ...credentials, [name]: value });
-  }
+  };
 
-  async function signup(event) {
+  const signup = async event => {
     event.preventDefault();
 
     try {
@@ -22,15 +22,15 @@ export default function SignupComponent() {
     } catch (err) {
       toast.error(err.message);
     }
-  }
+  };
 
-  async function signInWithGoogle() {
+  const signInWithGoogle = async () => {
     try {
       await googleSignInAPI();
     } catch (err) {
       toast.error(err.message);
     }
-  }
+  };
 
   return (
     <section className='signup-wrapper'>
