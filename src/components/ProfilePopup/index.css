@@ -1,0 +1,17 @@
+.popup-card {
+  position: absolute;
+  right: 100px;
+  top: 55px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  width: 100px;
+  height: 100px;
+  padding: 8px 12px;
+}
+
+.popup-option {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}

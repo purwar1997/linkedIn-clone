@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { signupAPI, googleSignInAPI } from '../api/AuthAPI';
+import { createUser } from '../api/FirestoreAPI';
 import LinkedInLogo from '../assets/linkedInLogo.png';
 import googleIcon from '../assets/googleIcon.png';
 import '../styles/SignupComponent.css';
 
 export default function SignupComponent() {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [credentials, setCredentials] = useState({ name: '', email: '', password: '' });
   const navigate = useNavigate();
 
   const handleChange = event => {
@@ -19,7 +20,8 @@ export default function SignupComponent() {
     event.preventDefault();
 
     try {
-      await signupAPI(credentials);
+      const user = await signupAPI(credentials);
+      await createUser(user.uid, credentials.name, credentials.email);
       navigate('/login', { replace: true });
     } catch (err) {
       toast.error(err.message);
@@ -45,6 +47,17 @@ export default function SignupComponent() {
 
       <div className='signup-container'>
         <form className='signup-form' onSubmit={signup}>
+          <div className='signup-inputs'>
+            <label htmlFor='name'>Name</label>
+            <input
+              type='text'
+              name='name'
+              id='name'
+              value={credentials.name}
+              onChange={handleChange}
+            />
+          </div>
+
           <div className='signup-inputs'>
             <label htmlFor='email'>Email address</label>
             <input

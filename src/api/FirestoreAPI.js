@@ -1,13 +1,34 @@
 import { auth, db } from '../config/firebase';
-import { collection, addDoc, Timestamp, getDocs, query, orderBy } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  Timestamp,
+  query,
+  orderBy,
+  onSnapshot,
+  doc,
+  setDoc,
+} from 'firebase/firestore';
 
+const usersRef = collection(db, 'users');
 const postsRef = collection(db, 'posts');
+
+export const createUser = async (userId, name, email) => {
+  const docRef = doc(db, 'users', userId);
+
+  const user = await setDoc(docRef, {
+    name,
+    email,
+  });
+
+  console.log(user);
+};
 
 export const createPostAPI = async post => {
   const docRef = await addDoc(postsRef, {
     content: post,
     userId: auth.currentUser.uid,
-    createdAt: Timestamp.fromDate(new Date()),
+    date: Timestamp.fromDate(new Date()),
   });
 
   if (!docRef?.id) {
@@ -15,9 +36,11 @@ export const createPostAPI = async post => {
   }
 };
 
-export const getPostsAPI = async () => {
-  const q = query(postsRef, orderBy('createdAt', 'desc'));
-  const querySnapshot = await getDocs(q);
-  const posts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  return posts;
+export const getPostsAPI = async setPosts => {
+  const q = query(postsRef, orderBy('date', 'desc'));
+
+  onSnapshot(q, querySnapshot => {
+    const posts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setPosts(posts);
+  });
 };

@@ -20,6 +20,10 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style-type: none;
+}
+
 input::placeholder,
 textarea::placeholder {
   color: rgba(0, 0, 0, 0.5);

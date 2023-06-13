@@ -44,7 +44,7 @@ export const loginAPI = async credentials => {
 };
 
 export const logoutAPI = async () => {
-  await signOut();
+  await signOut(auth);
 };
 
 export const googleSignInAPI = async () => {
