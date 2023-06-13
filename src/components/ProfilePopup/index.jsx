@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { logoutAPI } from '../../api/AuthApi';
 import './index.css';
 
-export default function ProfilePopup({ closePopup }) {
+export default function ProfilePopup() {
   const navigate = useNavigate();
 
   const signOut = async () => {

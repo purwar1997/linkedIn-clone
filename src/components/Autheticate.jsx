@@ -11,7 +11,7 @@ export default function Authenticate({ children }) {
   useEffect(() => {
     onAuthStateChanged(auth, user => {
       if (!user?.accessToken) {
-        navigate('/login');
+        navigate('login');
       } else {
         setLoading(false);
       }

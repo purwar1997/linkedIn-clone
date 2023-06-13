@@ -1,4 +1,4 @@
-import CreatePost from './CreatePost/index';
+import CreatePost from './UserFeed/index';
 import '../styles/HomeComponent.css';
 
 export default function HomeComponent() {

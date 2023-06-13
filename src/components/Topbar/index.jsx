@@ -9,7 +9,7 @@ import ProfilePopup from '../ProfilePopup';
 import TopbarLogo from '../../assets/topbarLogo.png';
 import './index.css';
 
-export default function Topbar() {
+export default function Topbar({ currentUser }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const openPopup = () => setIsPopupOpen(true);
@@ -38,7 +38,7 @@ export default function Topbar() {
         />
       </div>
 
-      {isPopupOpen && <ProfilePopup closePopup={closePopup} />}
+      {isPopupOpen && <ProfilePopup />}
     </div>
   );
 }

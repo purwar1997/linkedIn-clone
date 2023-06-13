@@ -6,7 +6,7 @@ import PostCard from '../PostCard/index';
 import topbarLogo from '../../assets/topbarLogo.png';
 import './index.css';
 
-export default function CreatePost() {
+export default function UserFeed() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [posts, setPosts] = useState([]);
 
@@ -27,7 +27,7 @@ export default function CreatePost() {
 
   return (
     <>
-      <div className='create-post'>
+      <div className='user-feed'>
         <img className='user-image' src={topbarLogo} />
         <button className='open-modal-btn' onClick={openModal}>
           Start a post

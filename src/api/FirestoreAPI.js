@@ -1,8 +1,7 @@
-import { auth, db } from '../config/firebase';
+import { db } from '../config/firebase';
 import {
   collection,
   addDoc,
-  Timestamp,
   query,
   orderBy,
   onSnapshot,
@@ -23,12 +22,20 @@ export const createUser = async (userId, name, email) => {
   }
 };
 
-export const createPostAPI = async post => {
-  const docRef = await addDoc(postsRef, {
-    content: post,
-    userId: auth.currentUser.uid,
-    date: Timestamp.fromDate(new Date()),
-  });
+export const getCurrentUser = async userId => {
+  const docRef = doc(db, 'users', userId);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error('User not found');
+  }
+
+  const user = { id: docSnap.id, ...docSnap.data() };
+  return user;
+};
+
+export const createPostAPI = async postData => {
+  const docRef = await addDoc(postsRef, postData);
 
   if (!docRef?.id) {
     throw new Error('Failed to create post');
@@ -36,10 +43,14 @@ export const createPostAPI = async post => {
 };
 
 export const getPostsAPI = async setPosts => {
-  const q = query(postsRef, orderBy('date', 'desc'));
+  const q = query(postsRef, orderBy('createdBy', 'desc'));
 
   onSnapshot(q, querySnapshot => {
     const posts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     setPosts(posts);
   });
+
+  // const querySnapshot = await getDocs(postsRef);
+  // const posts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  // return posts;
 };

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { currentUserContext } from '../../context';
 import { RxCross1 } from 'react-icons/rx';
 import { toast } from 'react-toastify';
 import { createPostAPI } from '../../api/FirestoreApi';
@@ -6,6 +7,7 @@ import './index.css';
 
 export default function Modal({ closeModal }) {
   const [post, setPost] = useState('');
+  const currentUser = useContext(currentUserContext);
 
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
@@ -21,7 +23,12 @@ export default function Modal({ closeModal }) {
 
   const createPost = async () => {
     try {
-      await createPostAPI(post.trim());
+      await createPostAPI({
+        content: post.trim(),
+        createdAt: new Date(),
+        createdBy: currentUser,
+      });
+
       closeModal();
     } catch (err) {
       toast.error(err.message);
