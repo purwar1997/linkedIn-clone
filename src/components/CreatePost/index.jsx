@@ -38,7 +38,7 @@ export default function CreatePost() {
 
       <div className='posts'>
         {posts.map(post => (
-          <PostCard post={post} />
+          <PostCard key={post.id} post={post} />
         ))}
       </div>
     </>

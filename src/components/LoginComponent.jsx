@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginAPI, googleSignInAPI } from '../api/AuthAPI';
+import { loginAPI, googleSignInAPI } from '../api/AuthApi';
 import { toast } from 'react-toastify';
 import LinkedInLogo from '../assets/linkedInLogo.png';
 import googleIcon from '../assets/googleIcon.png';

@@ -8,6 +8,7 @@ import {
   onSnapshot,
   doc,
   setDoc,
+  getDoc,
 } from 'firebase/firestore';
 
 const usersRef = collection(db, 'users');
@@ -15,13 +16,11 @@ const postsRef = collection(db, 'posts');
 
 export const createUser = async (userId, name, email) => {
   const docRef = doc(db, 'users', userId);
+  const docSnap = await getDoc(docRef);
 
-  const user = await setDoc(docRef, {
-    name,
-    email,
-  });
-
-  console.log(user);
+  if (!docSnap.exists()) {
+    await setDoc(docRef, { name, email });
+  }
 };
 
 export const createPostAPI = async post => {

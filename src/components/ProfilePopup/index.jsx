@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { logoutAPI } from '../../api/AuthAPI';
+import { logoutAPI } from '../../api/AuthApi';
 import './index.css';
 
 export default function ProfilePopup({ closePopup }) {

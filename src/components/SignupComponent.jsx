@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { signupAPI, googleSignInAPI } from '../api/AuthAPI';
-import { createUser } from '../api/FirestoreAPI';
+import { signupAPI, googleSignInAPI } from '../api/AuthApi';
+import { createUser } from '../api/FirestoreApi';
 import LinkedInLogo from '../assets/linkedInLogo.png';
 import googleIcon from '../assets/googleIcon.png';
 import '../styles/SignupComponent.css';

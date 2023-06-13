@@ -1,4 +1,5 @@
 import { auth } from '../config/firebase';
+import { createUser } from './FirestoreApi';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -8,7 +9,11 @@ import {
 } from 'firebase/auth';
 
 export const signupAPI = async credentials => {
-  const { email, password } = credentials;
+  const { name, email, password } = credentials;
+
+  if (!name) {
+    throw new Error('Please enter a name');
+  }
 
   if (!email) {
     throw new Error('Please enter an email address');
@@ -55,5 +60,6 @@ export const googleSignInAPI = async () => {
   const token = credential.accessToken;
   const user = response.user;
 
+  await createUser(user.uid, user.displayName, user.email);
   return { user, token };
 };
