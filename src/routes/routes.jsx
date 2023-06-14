@@ -4,6 +4,7 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 import Authenticate from '../components/Autheticate';
 import HomeLayout from '../layouts/HomeLayout';
 import Home from '../pages/Home';
+import ProfileLayout from '../layouts/ProfileLayout';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 
@@ -17,10 +18,16 @@ const router = createBrowserRouter(
             <HomeLayout />
           </Authenticate>
         }
-      >
-        <Route index element={<Home />} />
-      </Route>
-      <Route path='login' element={<Login />} />
+      />
+      <Route
+        path='/profile'
+        element={
+          <Authenticate>
+            <ProfileLayout />
+          </Authenticate>
+        }
+      />
+      <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
     </Fragment>
   )

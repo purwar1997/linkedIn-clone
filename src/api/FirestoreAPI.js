@@ -8,12 +8,13 @@ import {
   doc,
   setDoc,
   getDoc,
+  updateDoc,
 } from 'firebase/firestore';
 
 const usersRef = collection(db, 'users');
 const postsRef = collection(db, 'posts');
 
-export const createUser = async (userId, name, email) => {
+export const createUserAPI = async (userId, name, email) => {
   const docRef = doc(db, 'users', userId);
   const docSnap = await getDoc(docRef);
 
@@ -22,7 +23,17 @@ export const createUser = async (userId, name, email) => {
   }
 };
 
-export const getCurrentUser = async userId => {
+export const updateUserAPI = async (userId, updates) => {
+  const { name, headline, education, location, company } = updates;
+
+  if (!(name && headline && education, location)) {
+    throw new Error('Name, headline, education and location are mandatory to fill.');
+  }
+
+  if (!company) {
+    delete updates.company;
+  }
+
   const docRef = doc(db, 'users', userId);
   const docSnap = await getDoc(docRef);
 
@@ -30,8 +41,21 @@ export const getCurrentUser = async userId => {
     throw new Error('User not found');
   }
 
-  const user = { id: docSnap.id, ...docSnap.data() };
-  return user;
+  await updateDoc(docRef, updates);
+};
+
+export const getCurrentUserAPI = async (userId, setCurrentUser) => {
+  const docRef = doc(db, 'users', userId);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error('User not found');
+  }
+
+  onSnapshot(docRef, doc => {
+    const user = { id: doc.id, ...doc.data() };
+    setCurrentUser(user);
+  });
 };
 
 export const createPostAPI = async postData => {
@@ -49,8 +73,4 @@ export const getPostsAPI = async setPosts => {
     const posts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     setPosts(posts);
   });
-
-  // const querySnapshot = await getDocs(postsRef);
-  // const posts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  // return posts;
 };

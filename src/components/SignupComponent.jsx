@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { signupAPI, googleSignInAPI } from '../api/AuthApi';
-import { createUser } from '../api/FirestoreApi';
+import { createUserAPI } from '../api/FirestoreApi';
 import LinkedInLogo from '../assets/linkedInLogo.png';
 import googleIcon from '../assets/googleIcon.png';
 import '../styles/SignupComponent.css';
@@ -21,7 +21,7 @@ export default function SignupComponent() {
 
     try {
       const user = await signupAPI(credentials);
-      await createUser(user.uid, credentials.name, credentials.email);
+      await createUserAPI(user.uid, credentials.name, credentials.email);
       navigate('/login', { replace: true });
     } catch (err) {
       toast.error(err.message);

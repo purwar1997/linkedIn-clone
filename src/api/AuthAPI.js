@@ -1,5 +1,5 @@
 import { auth } from '../config/firebase';
-import { createUser } from './FirestoreApi';
+import { createUserAPI } from './FirestoreApi';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -60,6 +60,6 @@ export const googleSignInAPI = async () => {
   const token = credential.accessToken;
   const user = response.user;
 
-  await createUser(user.uid, user.displayName, user.email);
+  await createUserAPI(user.uid, user.displayName, user.email);
   return { user, token };
 };

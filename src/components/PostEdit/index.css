@@ -1,0 +1,95 @@
+.edit-modal-background {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.edit-modal-container {
+  margin-top: 40px;
+  width: 700px;
+  height: 500px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-modal-header {
+  height: 55px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 25px;
+  position: relative;
+}
+
+.edit-modal-header > h3 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.edit-modal-header > button {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.edit-modal-body {
+  flex: 1;
+  padding: 20px 25px;
+  overflow: auto;
+}
+
+.edit-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.edit-input > label {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.edit-input > input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding-inline: 8px;
+  font-size: 15px;
+}
+
+.edit-modal-footer {
+  height: 60px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-inline: 25px;
+}
+
+.save-btn {
+  background-color: #0a66c2;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}

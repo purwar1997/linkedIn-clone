@@ -6,7 +6,7 @@ import PostCard from '../PostCard/index';
 import topbarLogo from '../../assets/topbarLogo.png';
 import './index.css';
 
-export default function UserFeed() {
+export default function UserFeed({ currentUser }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [posts, setPosts] = useState([]);
 
@@ -34,7 +34,7 @@ export default function UserFeed() {
         </button>
       </div>
 
-      {isModalOpen && <Modal closeModal={closeModal} />}
+      {isModalOpen && <Modal closeModal={closeModal} currentUser={currentUser} />}
 
       <div className='posts'>
         {posts.map(post => (

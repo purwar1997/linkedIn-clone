@@ -1,13 +1,12 @@
-import { useState, useContext } from 'react';
-import { currentUserContext } from '../../context';
+import { useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import { toast } from 'react-toastify';
+import { DateTime } from 'luxon';
 import { createPostAPI } from '../../api/FirestoreApi';
 import './index.css';
 
-export default function Modal({ closeModal }) {
+export default function Modal({ closeModal, currentUser }) {
   const [post, setPost] = useState('');
-  const currentUser = useContext(currentUserContext);
 
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
@@ -25,7 +24,7 @@ export default function Modal({ closeModal }) {
     try {
       await createPostAPI({
         content: post.trim(),
-        createdAt: new Date(),
+        createdAt: DateTime.now().toJSDate(),
         createdBy: currentUser,
       });
 

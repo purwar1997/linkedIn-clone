@@ -1,10 +1,10 @@
-import CreatePost from './UserFeed/index';
+import UserFeed from './UserFeed/index';
 import '../styles/HomeComponent.css';
 
-export default function HomeComponent() {
+export default function HomeComponent({ currentUser }) {
   return (
     <div className='home-component'>
-      <CreatePost />
+      <UserFeed currentUser={currentUser} />
     </div>
   );
 }

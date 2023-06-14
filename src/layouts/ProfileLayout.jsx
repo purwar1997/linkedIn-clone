@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { auth } from '../config/firebase';
 import { getCurrentUserAPI } from '../api/FirestoreApi';
-import Topbar from '../components/Topbar/index';
-import Home from '../pages/Home';
+import Topbar from '../components/Topbar';
+import Profile from '../pages/Profile';
 
-export default function HomeLayout() {
+export default function ProfileLayout() {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -20,10 +20,14 @@ export default function HomeLayout() {
     getLoggedInUser();
   }, []);
 
+  if (!currentUser) {
+    return null;
+  }
+
   return (
     <>
       <Topbar currentUser={currentUser} />
-      <Home currentUser={currentUser} />
+      <Profile currentUser={currentUser} />
     </>
   );
 }
