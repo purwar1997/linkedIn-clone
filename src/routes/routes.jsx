@@ -20,7 +20,7 @@ const router = createBrowserRouter(
         }
       />
       <Route
-        path='/profile'
+        path='/profile/:profileId'
         element={
           <Authenticate>
             <ProfileLayout />

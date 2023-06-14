@@ -1,28 +1,28 @@
 import { useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import { toast } from 'react-toastify';
-import { updateUserAPI } from '../../api/FirestoreApi';
+import { updateProfileAPI } from '../../api/FirestoreApi';
 import './index.css';
 
-export default function PostEdit({ onEdit, currentUser }) {
-  const [userDetails, setUserDetails] = useState({
-    name: currentUser.name,
-    headline: currentUser.headline,
-    location: currentUser.location,
-    education: currentUser.education,
-    company: currentUser.company,
+export default function PostEdit({ onEdit, profile }) {
+  const [userProfile, setUserProfile] = useState({
+    name: profile.name,
+    headline: profile.headline,
+    location: profile.location,
+    education: profile.education,
+    company: profile.company,
   });
 
   const handleChange = event => {
     const { name, value } = event.target;
-    setUserDetails({ ...userDetails, [name]: value });
+    setUserProfile({ ...userProfile, [name]: value });
   };
 
-  const updateUser = async event => {
+  const updateProfile = async event => {
     event.preventDefault();
 
     try {
-      await updateUserAPI(currentUser.id, userDetails);
+      await updateProfileAPI(profile.id, userProfile);
       onEdit();
     } catch (err) {
       toast.error(err.message);
@@ -59,7 +59,7 @@ export default function PostEdit({ onEdit, currentUser }) {
               type='text'
               name='name'
               id='name'
-              value={userDetails.name || ''}
+              value={userProfile.name || ''}
               onChange={handleChange}
             />
           </div>
@@ -70,7 +70,7 @@ export default function PostEdit({ onEdit, currentUser }) {
               type='text'
               name='headline'
               id='headline'
-              value={userDetails.headline || ''}
+              value={userProfile.headline || ''}
               onChange={handleChange}
             />
           </div>
@@ -81,7 +81,7 @@ export default function PostEdit({ onEdit, currentUser }) {
               type='text'
               name='location'
               id='location'
-              value={userDetails.location || ''}
+              value={userProfile.location || ''}
               onChange={handleChange}
             />
           </div>
@@ -92,7 +92,7 @@ export default function PostEdit({ onEdit, currentUser }) {
               type='text'
               name='education'
               id='education'
-              value={userDetails.education || ''}
+              value={userProfile.education || ''}
               onChange={handleChange}
             />
           </div>
@@ -103,14 +103,14 @@ export default function PostEdit({ onEdit, currentUser }) {
               type='text'
               name='company'
               id='company'
-              value={userDetails.company || ''}
+              value={userProfile.company || ''}
               onChange={handleChange}
             />
           </div>
         </div>
 
         <div className='edit-modal-footer'>
-          <button className='save-btn' onClick={updateUser}>
+          <button className='save-btn' onClick={updateProfile}>
             Save
           </button>
         </div>

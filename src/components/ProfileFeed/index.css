@@ -1,0 +1,57 @@
+.profile-feed {
+  padding: 30px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-card {
+  max-width: 800px;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px 24px;
+  position: relative;
+}
+
+.edit-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.profile-info {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile-info > div > * {
+  margin-bottom: 10px;
+}
+
+.profile-info-left {
+  width: 60%;
+}
+
+.username {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.headline {
+  line-height: 1.5;
+}
+
+.posts {
+  max-width: 800px;
+  width: 100%;
+}

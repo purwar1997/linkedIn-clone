@@ -1,5 +1,5 @@
 import ProfileComponent from '../components/ProfileComponent';
 
-export default function Profile({ currentUser }) {
-  return <ProfileComponent currentUser={currentUser} />;
+export default function Profile({ currentUser, profileId }) {
+  return <ProfileComponent currentUser={currentUser} profileId={profileId} />;
 }

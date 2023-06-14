@@ -1,10 +1,10 @@
-import ProfileCard from './ProfileCard/index';
-import '../styles/ProfileComponent.css';
+import ProfileFeed from './ProfileFeed/index';
+// import '../styles/ProfileComponent.css';
 
-export default function ProfileComponent({ currentUser }) {
+export default function ProfileComponent({ currentUser, profileId }) {
   return (
     <div className='profile-component'>
-      <ProfileCard currentUser={currentUser} />
+      <ProfileFeed currentUser={currentUser} profileId={profileId} />
     </div>
   );
 }

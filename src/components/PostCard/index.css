@@ -1,9 +1,5 @@
-.posts {
-  width: 100%;
-  max-width: 650px;
-}
-
 .post-card {
+  width: 100%;
   margin-bottom: 15px;
   background-color: #fff;
   padding: 20px;

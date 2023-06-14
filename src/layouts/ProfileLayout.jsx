@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { auth } from '../config/firebase';
 import { getCurrentUserAPI } from '../api/FirestoreApi';
@@ -7,6 +8,7 @@ import Profile from '../pages/Profile';
 
 export default function ProfileLayout() {
   const [currentUser, setCurrentUser] = useState(null);
+  const { profileId } = useParams();
 
   useEffect(() => {
     const getLoggedInUser = async () => {
@@ -27,7 +29,7 @@ export default function ProfileLayout() {
   return (
     <>
       <Topbar currentUser={currentUser} />
-      <Profile currentUser={currentUser} />
+      <Profile currentUser={currentUser} profileId={profileId} />
     </>
   );
 }
