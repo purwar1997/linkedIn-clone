@@ -1,12 +1,19 @@
 .user-feed {
+  padding: 30px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.create-post-card {
+  max-width: 800px;
   width: 100%;
-  max-width: 650px;
   height: 120px;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 20px;
   padding-inline: 30px;
@@ -20,7 +27,7 @@
 .open-modal-btn {
   flex: 1;
   background-color: #fff;
-  height: 50px;
+  height: 52px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 30px;
   text-align: left;
@@ -33,4 +40,9 @@
 .open-modal-btn:hover {
   cursor: pointer;
   background-color: #ebebeb;
+}
+
+.posts {
+  max-width: 800px;
+  width: 100%;
 }

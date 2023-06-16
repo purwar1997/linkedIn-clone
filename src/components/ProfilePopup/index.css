@@ -5,13 +5,42 @@
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 6px;
-  width: 100px;
-  height: 100px;
-  padding: 8px 12px;
+  width: 350px;
+  height: auto;
+  padding: 20px 15px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
 }
 
-.popup-option {
+.name {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.bio {
+  margin-top: -5px;
   font-size: 15px;
-  color: rgba(0, 0, 0, 0.6);
+  line-height: 1.4;
+}
+
+.btn-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup-btn {
+  padding: 6px;
+  background-color: #fff;
+  border: 1px solid #0a66c2;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0a66c2;
   cursor: pointer;
 }

@@ -26,8 +26,8 @@ export default function UserFeed({ currentUser }) {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <>
-      <div className='user-feed'>
+    <div className='user-feed'>
+      <div className='create-post-card'>
         <img className='user-image' src={topbarLogo} />
         <button className='open-modal-btn' onClick={openModal}>
           Start a post
@@ -41,6 +41,6 @@ export default function UserFeed({ currentUser }) {
           <PostCard key={post.id} post={post} />
         ))}
       </div>
-    </>
+    </div>
   );
 }

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { logoutAPI } from '../../api/AuthApi';
 import './index.css';
 
-export default function ProfilePopup() {
+export default function ProfilePopup({ currentUser }) {
   const navigate = useNavigate();
 
   const signOut = async () => {
@@ -15,25 +15,20 @@ export default function ProfilePopup() {
     }
   };
 
-  //   const closePopupWindow = event => {
-  //     if (event.target !== event.currentTarget) {
-  //       closePopup();
-  //     }
-  //   };
-
-  //   document.addEventListener('keydown', event => {
-  //     if (event.key === 'Escape') {
-  //       closePopup();
-  //     }
-  //   });
+  console.log(currentUser);
 
   return (
     <div className='popup-card'>
-      <ul className='popup-options'>
-        <li className='popup-option' onClick={signOut}>
+      <p className='name'>{currentUser.name}</p>
+      <p className='bio'>{currentUser.headline}</p>
+      <div className='btn-group'>
+        <button className='popup-btn' onClick={() => navigate(`/profile/${currentUser.id}`)}>
+          View Profile
+        </button>
+        <button className='popup-btn' onClick={signOut}>
           Sign Out
-        </li>
-      </ul>
+        </button>
+      </div>
     </div>
   );
 }

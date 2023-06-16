@@ -1,5 +1,4 @@
 import ProfileFeed from './ProfileFeed/index';
-// import '../styles/ProfileComponent.css';
 
 export default function ProfileComponent({ currentUser, profileId }) {
   return (

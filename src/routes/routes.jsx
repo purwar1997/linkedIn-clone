@@ -1,9 +1,7 @@
 import { Fragment } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
-
 import Authenticate from '../components/Autheticate';
 import HomeLayout from '../layouts/HomeLayout';
-import Home from '../pages/Home';
 import ProfileLayout from '../layouts/ProfileLayout';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';

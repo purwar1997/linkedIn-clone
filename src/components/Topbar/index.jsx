@@ -27,7 +27,9 @@ export default function Topbar({ currentUser }) {
       </form>
 
       <div className='react-icons'>
-        <AiFillHome className='react-icon' />
+        <Link to='/'>
+          <AiFillHome className='react-icon' />
+        </Link>
         <HiUsers className='react-icon' />
         <BsBriefcaseFill className='react-icon' />
         <MdMessage className='react-icon' />
@@ -38,7 +40,7 @@ export default function Topbar({ currentUser }) {
         />
       </div>
 
-      {isPopupOpen && <ProfilePopup />}
+      {isPopupOpen && <ProfilePopup currentUser={currentUser} />}
     </div>
   );
 }
