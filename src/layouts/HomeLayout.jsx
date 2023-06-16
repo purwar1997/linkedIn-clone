@@ -20,6 +20,10 @@ export default function HomeLayout() {
     getLoggedInUser();
   }, []);
 
+  if (!currentUser) {
+    return;
+  }
+
   return (
     <>
       <Topbar currentUser={currentUser} />

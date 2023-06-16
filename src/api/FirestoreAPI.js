@@ -101,3 +101,28 @@ export const getPostsAPI = async setPosts => {
     setPosts(posts);
   });
 };
+
+export const managePostLikesAPI = async (postId, userId, action) => {
+  const docRef = doc(db, 'posts', postId);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error('Post not found');
+  }
+
+  const post = { id: docSnap.id, ...docSnap.data() };
+
+  switch (action) {
+    case 'like': {
+      post.likedBy = post.likedBy ? [...post.likedBy, userId] : [userId];
+      break;
+    }
+
+    case 'unlike': {
+      post.likedBy = post.likedBy.filter(likedUserId => likedUserId !== userId);
+      break;
+    }
+  }
+
+  await updateDoc(docRef, post);
+};

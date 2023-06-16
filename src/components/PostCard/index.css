@@ -5,4 +5,28 @@
   padding: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.like-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+}
+
+.like-icon {
+  font-size: 25px;
+}
+
+.like-button > span {
+  font-weight: 500;
+}
+
+.liked {
+  color: #378fe9;
 }
