@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BsPencilSquare } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import { getProfileAPI, getPostsAPI } from '../../api/FirestoreApi';
-import PostEdit from '../PostEdit';
+import ProfileEdit from '../ProfileEdit';
 import PostCard from '../PostCard';
 import './index.css';
 
@@ -49,19 +49,36 @@ export default function ProfileFeed({ currentUser, profileId }) {
         )}
 
         <div className='profile-info'>
-          <div className='profile-info-left'>
-            <h2 className='username'>{profile.name}</h2>
-            <p className='headline'>{profile.headline}</p>
-            <p>{profile.location}</p>
+          <div className='profile-info-top'>
+            <div className='profile-info-left'>
+              <h2 className='username'>{profile.name}</h2>
+              <p className='headline'>{profile.headline}</p>
+              <p>{profile.location}</p>
+              {profile.website && (
+                <a className='website' href={profile.website} target='_blank'>
+                  {profile.website}
+                </a>
+              )}
+            </div>
+
+            <div className='profile-info-right'>
+              <p>{profile.education}</p>
+              {profile.company && <p>{profile.company}</p>}
+            </div>
           </div>
 
-          <div className='profile-info-right'>
-            <p>{profile.education}</p>
-            {profile.company && <p>{profile.company}</p>}
+          <div className='profile-info-bottom'>
+            {profile.about && <p className='about'>{profile.about}</p>}
+            {profile.skills && (
+              <p className='skills'>
+                <span>Skills: </span>
+                {profile.skills.join(', ')}
+              </p>
+            )}
           </div>
         </div>
 
-        {isEdit && <PostEdit onEdit={onEdit} profile={profile} />}
+        {isEdit && <ProfileEdit onEdit={onEdit} profile={profile} />}
       </div>
 
       <div className='posts'>

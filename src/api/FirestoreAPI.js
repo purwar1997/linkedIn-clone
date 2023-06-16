@@ -54,14 +54,24 @@ export const getProfileAPI = async (profileId, setProfile) => {
 };
 
 export const updateProfileAPI = async (userId, updates) => {
-  const { name, headline, education, location, company } = updates;
-
-  if (!(name && headline && education, location)) {
-    throw new Error('Name, headline, education and location are mandatory to fill.');
+  for (const key in updates) {
+    updates[key] = updates[key].trim();
   }
 
-  if (!company) {
-    delete updates.company;
+  for (const [key, value] of Object.entries(updates)) {
+    if (!value) {
+      delete updates[key];
+    }
+  }
+
+  const { name, headline, education, location, phoneNo } = updates;
+
+  if (!(name && headline && education, location && phoneNo)) {
+    throw new Error('Fields marked with * are mandatory.');
+  }
+
+  if (updates.skills) {
+    updates.skills = updates.skills.split(', ');
   }
 
   const docRef = doc(db, 'users', userId);

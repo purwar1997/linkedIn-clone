@@ -28,13 +28,20 @@
 }
 
 .profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-info-top {
   margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.profile-info > div > * {
+.profile-info-left > *,
+.profile-info-right > * {
   margin-bottom: 10px;
 }
 
@@ -49,4 +56,16 @@
 
 .headline {
   line-height: 1.5;
+}
+
+.about {
+  line-height: 1.5;
+}
+
+.skills {
+  margin-top: 15px;
+}
+
+.skills > span {
+  font-weight: 500;
 }
