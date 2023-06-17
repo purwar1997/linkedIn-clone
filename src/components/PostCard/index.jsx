@@ -23,8 +23,16 @@ export default function PostCard({ post, currentUser }) {
 
       <p>{post.content}</p>
 
+      <p>
+        {post.likedBy?.length ?? 0} {post.likedBy?.length === 1 ? 'Like' : 'Likes'}
+      </p>
+
       <div className={`like-button ${postLiked ? 'liked' : ''}`} onClick={managePostLikes}>
-        {postLiked ? <AiFillLike className='like-icon' /> : <AiOutlineLike className='like-icon' />}
+        {postLiked ? (
+          <AiFillLike className='unlike-icon' />
+        ) : (
+          <AiOutlineLike className='like-icon' />
+        )}
         <span>Like</span>
       </div>
     </div>
