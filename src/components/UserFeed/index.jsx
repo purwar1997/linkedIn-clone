@@ -9,7 +9,6 @@ import './index.css';
 export default function UserFeed({ currentUser }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const getPosts = async () => {
@@ -21,16 +20,6 @@ export default function UserFeed({ currentUser }) {
     };
 
     getPosts();
-
-    // const getComments = async () => {
-    //   try {
-    //     await getCommentsAPI(setComments);
-    //   } catch (err) {
-    //     toast.error(err.message);
-    //   }
-    // };
-
-    // getComments();
   }, []);
 
   const openModal = () => setIsModalOpen(true);
@@ -49,14 +38,7 @@ export default function UserFeed({ currentUser }) {
 
       <div className='posts'>
         {posts.map(post => (
-          <PostCard
-            key={post.id}
-            post={post}
-            currentUser={currentUser}
-            // comments={
-            //   post.commentedBy && comments.filter(comment => post.commentedBy.includes(comment.id))
-            // }
-          />
+          <PostCard key={post.id} post={post} currentUser={currentUser} />
         ))}
       </div>
     </div>

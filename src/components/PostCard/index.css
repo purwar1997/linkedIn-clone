@@ -7,8 +7,11 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 15px;
+}
+
+.profile-link {
+  align-self: flex-start;
 }
 
 .divider {
@@ -49,34 +52,4 @@
   font-size: 22px;
   position: relative;
   top: 2px;
-}
-
-.comment-box {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.comment-box > input {
-  height: 45px;
-  width: 400px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  border-radius: 30px;
-  padding-inline: 20px;
-  font-size: 15px;
-}
-
-.comment-post-btn {
-  height: 40px;
-  border-radius: 30px;
-  padding-inline: 20px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.active {
-  border: 1px solid #0a66c2;
 }

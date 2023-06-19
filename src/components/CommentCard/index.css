@@ -1,0 +1,47 @@
+.comment-card {
+  width: 100%;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 15px;
+  border-radius: 7px;
+  position: relative;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.comment-header > a {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.comment-header > a:hover {
+  color: #0a66c2;
+}
+
+.comment-author {
+  color: #fff;
+  background-color: #56687a;
+  font-size: 13px;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+.three-dots {
+  align-self: flex-start;
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+}
+
+.comment-headline {
+  position: relative;
+  bottom: 5px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.7);
+}

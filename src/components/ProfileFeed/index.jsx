@@ -33,16 +33,6 @@ export default function ProfileFeed({ currentUser, profileId }) {
     };
 
     getUserPosts();
-
-    // const getComments = async () => {
-    //   try {
-    //     await getCommentsAPI(setComments);
-    //   } catch (err) {
-    //     toast.error(err.message);
-    //   }
-    // };
-
-    // getComments();
   }, []);
 
   if (!profile) {
@@ -95,15 +85,7 @@ export default function ProfileFeed({ currentUser, profileId }) {
         {posts
           .filter(post => post.createdBy.id === profileId)
           .map(post => (
-            <PostCard
-              key={post.id}
-              post={post}
-              currentUser={currentUser}
-              // comments={
-              //   post.commentedBy &&
-              //   comments.filter(comment => post.commentedBy.includes(comment.id))
-              // }
-            />
+            <PostCard key={post.id} post={post} currentUser={currentUser} />
           ))}
       </div>
     </div>
