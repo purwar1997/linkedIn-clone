@@ -45,3 +45,27 @@
   font-size: 13px;
   color: rgba(0, 0, 0, 0.7);
 }
+
+.comment-popup {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  background-color: #fff;
+  padding: 12px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.comment-popup > div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
