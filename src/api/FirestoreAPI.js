@@ -10,10 +10,13 @@ import {
   getDoc,
   getDocs,
   updateDoc,
+  where,
+  queryEqual,
 } from 'firebase/firestore';
 
 const usersRef = collection(db, 'users');
 const postsRef = collection(db, 'posts');
+const commentsRef = collection(db, 'comments');
 
 // User collection
 export const createUserAPI = async (userId, name, email) => {
@@ -125,4 +128,58 @@ export const managePostLikesAPI = async (postId, userId, action) => {
   }
 
   await updateDoc(docRef, post);
+};
+
+// Comments collection
+export const getPostCommentsAPI = async (postId, setComments) => {
+  // const q = query(commentsRef, orderBy('date', 'desc'));
+
+  // onSnapshot(q, querySnapshot => {
+  //   const comments = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  //   setComments(comments);
+  // });
+
+  // const postComments = commentIds?.map(async commentId => {
+  //   const docRef = doc(db, 'comments', commentId);
+  //   const docSnap = await getDoc(docRef);
+
+  //   if (!docSnap.exists()) {
+  //     throw new Error('Comment not found');
+  //   }
+
+  //   return { id: docSnap.id, ...docSnap.data() };
+  // });
+
+  // return postComments;
+
+  const q = query(commentsRef, where('postId', '==', postId), orderBy('postId', 'desc'));
+
+  onSnapshot(q, querySnapshot => {
+    const comments = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log(comments);
+    setComments(comments);
+  });
+};
+
+export const addPostCommentAPI = async commentInfo => {
+  let docRef = await addDoc(commentsRef, commentInfo);
+
+  if (!docRef?.id) {
+    throw new Error('Failed to add comment');
+  }
+
+  // const postDocRef = doc(db, 'posts', postId);
+  // const postDocSnap = await getDoc(postDocRef);
+
+  // if (!postDocSnap.exists()) {
+  //   throw new Error('Post not found');
+  // }
+
+  // const post = { id: postDocSnap.id, ...postDocSnap.data() };
+  // post.commentedBy = post.commentedBy ? post.commentedBy.push(docRef.id) : [docRef.id];
+  // await updateDoc(postDocRef, post);
+
+  // const newPostDocSnap = await getDoc(postDocRef);
+  // const updatedPost = { id: newPostDocSnap.id, ...newPostDocSnap.data() };
+  // return updatedPost.commentedBy;
 };
