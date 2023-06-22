@@ -32,7 +32,7 @@ export default function CommentBox({ post, currentUser }) {
           headline: currentUser.headline,
           isAuthor: currentUser.id === post.createdBy.id,
         },
-        date: DateTime.now().toJSDate(),
+        createdAt: DateTime.now().toJSDate(),
       };
 
       await addPostCommentAPI(commentInfo);

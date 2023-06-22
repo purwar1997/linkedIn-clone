@@ -1,0 +1,30 @@
+.comment-edit-form > input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  font-size: 15px;
+}
+
+.edit-form-btns {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.edit-form-btns > button {
+  font-size: 14px;
+  padding: 3px 15px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.edit-form-btns > button:first-of-type {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#save-changes {
+  color: #fff;
+  background-color: #0a66c2;
+  border: 1px solid #0a66c2;
+}

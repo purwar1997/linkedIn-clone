@@ -147,3 +147,14 @@ export const addPostCommentAPI = async commentInfo => {
     throw new Error('Failed to add comment');
   }
 };
+
+export const editPostCommentAPI = async (commentId, updates) => {
+  const docRef = doc(db, 'comments', commentId);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error('Comment not found');
+  }
+
+  await updateDoc(docRef, updates);
+};

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaTrashAlt, FaPen } from 'react-icons/fa';
+import CommentEdit from '../CommentEdit';
 import './index.css';
 
 export default function CommentCard({ comment }) {
@@ -19,7 +20,10 @@ export default function CommentCard({ comment }) {
         {comment.addedBy.isAuthor && (
           <>
             <span className='comment-author'>Author</span>
-            <BsThreeDots className='three-dots' onClick={() => setIsPopupOpen(!isPopupOpen)} />
+
+            {!isEdit && (
+              <BsThreeDots className='three-dots' onClick={() => setIsPopupOpen(!isPopupOpen)} />
+            )}
           </>
         )}
       </div>
@@ -27,21 +31,19 @@ export default function CommentCard({ comment }) {
       <p className='comment-headline'>{formatHeadline(comment.addedBy.headline)}</p>
 
       {isEdit ? (
-        <div className='comment-edit-form'>
-          <textarea name='comment' placeholder='Add a comment...' value={comment.text} onChange={} />
-
-          <div className='btn-group'>
-            <button onClick={}>Save Changes</button>
-            <button onClick={() => setIsEdit(false)}>Cancel</button>
-          </div>
-        </div>
+        <CommentEdit comment={comment} setIsEdit={setIsEdit} />
       ) : (
         <p className='comment-text'>{comment.text}</p>
       )}
 
       {isPopupOpen && (
         <div className='comment-popup'>
-          <div onClick={() => setIsEdit(true)}>
+          <div
+            onClick={() => {
+              setIsPopupOpen(false);
+              setIsEdit(true);
+            }}
+          >
             <FaPen />
             <span>Edit</span>
           </div>

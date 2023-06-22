@@ -20,7 +20,7 @@
   background-color: rgba(0, 0, 0, 0.15);
 }
 
-.post-actions {
+.action-btns {
   display: flex;
   align-items: center;
   gap: 40px;

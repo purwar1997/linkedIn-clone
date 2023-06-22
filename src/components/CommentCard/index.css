@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 12px 15px;
+  padding: 15px;
   border-radius: 7px;
   position: relative;
 }
@@ -48,7 +48,7 @@
 
 .comment-popup {
   position: absolute;
-  top: 40px;
+  top: 35px;
   right: 20px;
   background-color: #fff;
   padding: 12px 20px;

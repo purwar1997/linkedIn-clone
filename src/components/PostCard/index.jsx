@@ -34,7 +34,7 @@ export default function PostCard({ post, currentUser }) {
 
       <div className='divider' />
 
-      <div className='post-actions'>
+      <div className='action-btns'>
         <div className={`like-btn ${postLiked ? 'liked' : ''}`} onClick={managePostLikes}>
           {postLiked ? (
             <AiFillLike className='unlike-icon' />
