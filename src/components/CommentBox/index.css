@@ -17,7 +17,7 @@
   font-size: 15px;
 }
 
-.comment-post-btn {
+.add-comment-btn {
   height: 40px;
   border-radius: 30px;
   padding-inline: 20px;
@@ -37,4 +37,3 @@
   flex-direction: column;
   gap: 15px;
 }
-

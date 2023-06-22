@@ -12,7 +12,7 @@
 .comment-header {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 .comment-header > a {
@@ -27,8 +27,8 @@
 .comment-author {
   color: #fff;
   background-color: #56687a;
-  font-size: 13px;
-  padding: 3px 8px;
+  font-size: 12px;
+  padding: 2px 7px;
   border-radius: 3px;
 }
 

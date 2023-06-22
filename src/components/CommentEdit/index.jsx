@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { DateTime } from 'luxon';
 import { toast } from 'react-toastify';
-import { editPostCommentAPI } from '../../api/FirestoreApi';
+import { editCommentAPI } from '../../api/FirestoreApi';
 import './index.css';
 
 export default function CommentEdit({ comment, setIsEdit }) {
   const [commentText, setCommentText] = useState(comment.text);
 
-  const editPostComment = async () => {
+  const editComment = async () => {
     try {
-      await editPostCommentAPI(comment.id, {
+      await editCommentAPI(comment.id, {
         text: commentText,
         updatedAt: DateTime.now().toJSDate(),
       });
@@ -21,7 +21,7 @@ export default function CommentEdit({ comment, setIsEdit }) {
   };
 
   return (
-    <div className='comment-edit-form'>
+    <div className='edit-comment-form'>
       <input
         type='text'
         name='comment'
@@ -30,14 +30,15 @@ export default function CommentEdit({ comment, setIsEdit }) {
         onChange={event => setCommentText(event.target.value)}
       />
 
-      <div className='edit-form-btns'>
+      <div className='edit-comment-btns'>
         <button
-          id={commentText === comment.text ? '' : 'save-changes'}
+          id={commentText === comment.text ? '' : 'save-changes-btn'}
           disabled={commentText === comment.text}
-          onClick={editPostComment}
+          onClick={editComment}
         >
           Save Changes
         </button>
+
         <button onClick={() => setIsEdit(false)}>Cancel</button>
       </div>
     </div>

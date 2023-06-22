@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
 import { toast } from 'react-toastify';
-import { getPostCommentsAPI, addPostCommentAPI } from '../../api/FirestoreApi';
+import { getCommentsAPI, addCommentAPI } from '../../api/FirestoreApi';
 import CommentCard from '../CommentCard';
 import './index.css';
 
@@ -10,18 +10,18 @@ export default function CommentBox({ post, currentUser }) {
   const [comment, setComment] = useState('');
 
   useEffect(() => {
-    const getPostComments = async () => {
+    const getComments = async () => {
       try {
-        await getPostCommentsAPI(post.id, setPostComments);
+        await getCommentsAPI(post.id, setPostComments);
       } catch (err) {
         toast.error(err.message);
       }
     };
 
-    getPostComments();
+    getComments();
   }, []);
 
-  const addPostComment = async () => {
+  const addComment = async () => {
     try {
       const commentInfo = {
         text: comment.trim(),
@@ -35,7 +35,7 @@ export default function CommentBox({ post, currentUser }) {
         createdAt: DateTime.now().toJSDate(),
       };
 
-      await addPostCommentAPI(commentInfo);
+      await addCommentAPI(commentInfo);
       setComment('');
     } catch (err) {
       toast.error(err.message);
@@ -55,20 +55,22 @@ export default function CommentBox({ post, currentUser }) {
 
         {comment && (
           <button
-            className={`comment-post-btn ${comment.trim() !== '' ? 'active' : ''}`}
+            className={`add-comment-btn ${comment.trim() !== '' ? 'active' : ''}`}
             disabled={comment.trim() === ''}
-            onClick={addPostComment}
+            onClick={addComment}
           >
             Post
           </button>
         )}
       </div>
 
-      <div className='comments'>
-        {postComments.map(comment => (
-          <CommentCard key={comment.id} comment={comment} />
-        ))}
-      </div>
+      {postComments.length > 0 && (
+        <div className='comments'>
+          {postComments.map(comment => (
+            <CommentCard key={comment.id} comment={comment} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

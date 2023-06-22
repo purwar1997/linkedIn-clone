@@ -10,8 +10,7 @@ import {
   getDoc,
   getDocs,
   updateDoc,
-  where,
-  queryEqual,
+  deleteDoc,
 } from 'firebase/firestore';
 
 const usersRef = collection(db, 'users');
@@ -105,7 +104,7 @@ export const getPostsAPI = async setPosts => {
   });
 };
 
-export const managePostLikesAPI = async (postId, userId, action) => {
+export const manageLikesAPI = async (postId, userId, action) => {
   const docRef = doc(db, 'posts', postId);
   const docSnap = await getDoc(docRef);
 
@@ -131,7 +130,7 @@ export const managePostLikesAPI = async (postId, userId, action) => {
 };
 
 // Comments collection
-export const getPostCommentsAPI = async (postId, setComments) => {
+export const getCommentsAPI = async (postId, setComments) => {
   const q = query(commentsRef, where('postId', '==', postId));
 
   onSnapshot(q, querySnapshot => {
@@ -140,7 +139,7 @@ export const getPostCommentsAPI = async (postId, setComments) => {
   });
 };
 
-export const addPostCommentAPI = async commentInfo => {
+export const addCommentAPI = async commentInfo => {
   let docRef = await addDoc(commentsRef, commentInfo);
 
   if (!docRef?.id) {
@@ -148,7 +147,7 @@ export const addPostCommentAPI = async commentInfo => {
   }
 };
 
-export const editPostCommentAPI = async (commentId, updates) => {
+export const editCommentAPI = async (commentId, updates) => {
   const docRef = doc(db, 'comments', commentId);
   const docSnap = await getDoc(docRef);
 
@@ -157,4 +156,15 @@ export const editPostCommentAPI = async (commentId, updates) => {
   }
 
   await updateDoc(docRef, updates);
+};
+
+export const deleteCommentAPI = async commentId => {
+  const docRef = doc(db, 'comments', commentId);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error('Comment not found');
+  }
+
+  await deleteDoc(docRef);
 };

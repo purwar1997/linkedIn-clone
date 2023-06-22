@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaTrashAlt, FaPen } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import { deleteCommentAPI } from '../../api/FirestoreApi';
 import CommentEdit from '../CommentEdit';
 import './index.css';
 
@@ -11,6 +13,15 @@ export default function CommentCard({ comment }) {
 
   const formatHeadline = headline =>
     headline.length > 120 ? `${headline.slice(0, 120)}...` : headline;
+
+  const deleteComment = async () => {
+    try {
+      await deleteCommentAPI(comment.id);
+      setIsPopupOpen(false);
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
 
   return (
     <div className='comment-card'>
@@ -48,7 +59,7 @@ export default function CommentCard({ comment }) {
             <span>Edit</span>
           </div>
 
-          <div>
+          <div onClick={deleteComment}>
             <FaTrashAlt />
             <span>Delete</span>
           </div>
