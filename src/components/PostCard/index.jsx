@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 import { BiCommentDetail } from 'react-icons/bi';
 import { toast } from 'react-toastify';
-import { managePostLikesAPI } from '../../api/FirestoreApi';
+import { manageLikesAPI } from '../../api/FirestoreApi';
 import CommentBox from '../CommentBox';
 import './index.css';
 
@@ -12,9 +12,9 @@ export default function PostCard({ post, currentUser }) {
 
   const postLiked = post.likedBy && post.likedBy.includes(currentUser.id);
 
-  const managePostLikes = async () => {
+  const manageLikes = async () => {
     try {
-      await managePostLikesAPI(post.id, currentUser.id, postLiked ? 'unlike' : 'like');
+      await manageLikesAPI(post.id, currentUser.id, postLiked ? 'unlike' : 'like');
     } catch (err) {
       toast.error(err.message);
     }
@@ -35,7 +35,7 @@ export default function PostCard({ post, currentUser }) {
       <div className='divider' />
 
       <div className='action-btns'>
-        <div className={`like-btn ${postLiked ? 'liked' : ''}`} onClick={managePostLikes}>
+        <div className={`like-btn ${postLiked ? 'liked' : ''}`} onClick={manageLikes}>
           {postLiked ? (
             <AiFillLike className='unlike-icon' />
           ) : (

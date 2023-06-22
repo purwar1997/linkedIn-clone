@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BsPencilSquare } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import { getProfileAPI, getPostsAPI } from '../../api/FirestoreApi';
+import { uploadFileAPI } from '../../api/StorageApi';
 import ProfileEdit from '../ProfileEdit';
 import PostCard from '../PostCard';
 import './index.css';
@@ -12,6 +13,14 @@ export default function ProfileFeed({ currentUser, profileId }) {
   const [isEdit, setIsEdit] = useState(false);
 
   const onEdit = () => setIsEdit(!isEdit);
+
+  const handleFileUpload = async event => {
+    try {
+      await uploadFileAPI(currentUser.id, event.target.files[0]);
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
 
   useEffect(() => {
     const getProfile = async () => {
@@ -47,6 +56,8 @@ export default function ProfileFeed({ currentUser, profileId }) {
             <BsPencilSquare />
           </button>
         )}
+
+        <input type='file' onChange={handleFileUpload} />
 
         <div className='profile-info'>
           <div className='profile-info-top'>
