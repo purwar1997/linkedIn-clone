@@ -6,6 +6,7 @@ import './index.css';
 
 export default function ImageUploadModal({ currentUser, setImageUploadModal }) {
   const [profileImage, setProfileImage] = useState(null);
+  const [imageURL, setImageURL] = useState('');
 
   const closeModal = () => setImageUploadModal(false);
 
@@ -21,9 +22,17 @@ export default function ImageUploadModal({ currentUser, setImageUploadModal }) {
     }
   });
 
+  const selectImage = event => {
+    const image = event.target.files[0];
+    setProfileImage(image);
+
+    const reader = new FileReader();
+    reader.addEventListener('load', event => setImageURL(event.target.result));
+    reader.readAsDataURL(image);
+  };
+
   const uploadImage = async () => {
     try {
-      //   console.log(profileImage);
       await uploadImageAPI(currentUser.id, profileImage);
       closeModal();
     } catch (err) {
@@ -39,14 +48,14 @@ export default function ImageUploadModal({ currentUser, setImageUploadModal }) {
         <h1 className='modal-heading'>Add Profile Image</h1>
 
         <div className='upload-image-input'>
-          <label htmlFor='profile-image'>Add an image</label>
-
-          <input
-            type='file'
-            id='profile-image'
-            onChange={event => setProfileImage(event.target.files[0])}
-            hidden
-          />
+          {imageURL ? (
+            <img className='uploaded-image' src={imageURL} />
+          ) : (
+            <>
+              <label htmlFor='profile-image'>Select an image</label>
+              <input type='file' id='profile-image' onChange={selectImage} hidden />
+            </>
+          )}
         </div>
 
         <button

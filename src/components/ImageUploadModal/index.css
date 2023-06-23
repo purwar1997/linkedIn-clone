@@ -1,7 +1,7 @@
 .image-upload-modal-container {
   padding: 20px 24px;
   width: 500px;
-  height: 300px;
+  height: 350px;
   background-color: #fff;
   border-radius: 10px;
   position: relative;
@@ -20,6 +20,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.uploaded-image {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
 }
 
 .upload-image-input > label {
