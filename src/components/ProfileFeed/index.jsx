@@ -1,26 +1,21 @@
 import { useState, useEffect } from 'react';
-import { BsPencilSquare } from 'react-icons/bs';
+import { BsPencilSquare, BsCameraFill } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import { getProfileAPI, getPostsAPI } from '../../api/FirestoreApi';
-import { uploadFileAPI } from '../../api/StorageApi';
 import ProfileEdit from '../ProfileEdit';
 import PostCard from '../PostCard';
+import ProfileImageModal from '../ProfileImageModal';
+import ImageUploadModal from '../ImageUploadModal';
 import './index.css';
 
 export default function ProfileFeed({ currentUser, profileId }) {
   const [profile, setProfile] = useState(null);
   const [posts, setPosts] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  const [imageUploadModal, setImageUploadModal] = useState(false);
+  const [profileImageModal, setProfileImageModal] = useState(false);
 
   const onEdit = () => setIsEdit(!isEdit);
-
-  const handleFileUpload = async event => {
-    try {
-      await uploadFileAPI(currentUser.id, event.target.files[0]);
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
 
   useEffect(() => {
     const getProfile = async () => {
@@ -57,7 +52,31 @@ export default function ProfileFeed({ currentUser, profileId }) {
           </button>
         )}
 
-        <input type='file' onChange={handleFileUpload} />
+        <div
+          className='image-upload'
+          onClick={() =>
+            currentUser.imageUrl ? setProfileImageModal(true) : setImageUploadModal(true)
+          }
+        >
+          {currentUser.imageUrl ? (
+            <img className='profile-image' src={currentUser.imageUrl} />
+          ) : (
+            <BsCameraFill className='camera-icon' />
+          )}
+        </div>
+
+        {profileImageModal && (
+          <ProfileImageModal
+            currentUser={currentUser}
+            setProfileImageModal={setProfileImageModal}
+            imageUploadModal={imageUploadModal}
+            setImageUploadModal={setImageUploadModal}
+          />
+        )}
+
+        {imageUploadModal && (
+          <ImageUploadModal currentUser={currentUser} setImageUploadModal={setImageUploadModal} />
+        )}
 
         <div className='profile-info'>
           <div className='profile-info-top'>

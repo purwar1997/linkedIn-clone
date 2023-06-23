@@ -1,11 +1,11 @@
 import { storage, db } from '../config/firebase';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
 import { doc, getDoc, updateDoc, Timestamp } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
 const usersRef = ref(storage, 'users');
 
-export const uploadFileAPI = async (userId, file) => {
+export const uploadImageAPI = async (userId, file) => {
   const metadata = {
     name: file.name,
     size: file.size,
@@ -22,8 +22,6 @@ export const uploadFileAPI = async (userId, file) => {
     },
     err => toast.error(err.message),
     async () => {
-      const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-
       const docRef = doc(db, 'users', userId);
       const docSnap = await getDoc(docRef);
 
@@ -31,10 +29,41 @@ export const uploadFileAPI = async (userId, file) => {
         throw new Error('User not found');
       }
 
+      const user = { id: docSnap.id, ...docSnap.data() };
+
+      if (user.profileImage && user.profileImage !== file.name) {
+        const storageRef = ref(storage, `users/${user.profileImage}`);
+        await deleteObject(storageRef);
+      }
+
+      const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+
       await updateDoc(docRef, {
+        profileImage: file.name,
         imageUrl: downloadURL,
         updatedAt: Timestamp.fromDate(new Date()),
       });
     }
   );
+};
+
+export const deleteImageAPI = async (userId, image) => {
+  const storageRef = ref(storage, `users/${image}`);
+  await deleteObject(storageRef);
+
+  const docRef = doc(db, 'users', userId);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error('User not found');
+  }
+
+  const user = { id: docSnap.id, ...docSnap.data() };
+
+  await updateDoc(docRef, {
+    ...user,
+    profileImage: null,
+    imageUrl: null,
+    updatedAt: Timestamp.fromDate(new Date()),
+  });
 };

@@ -1,0 +1,40 @@
+.profile-modal-container {
+  padding: 25px;
+  width: 500px;
+  height: 320px;
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+  top: 40px;
+}
+
+.profile-modal-body {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.profile-modal-body > img {
+  height: 180px;
+  width: 180px;
+  border-radius: 50%;
+}
+
+.profile-modal-btns > button {
+  margin: 0px 6px;
+  padding: 6px 15px;
+  border: 1px solid #0a66c2;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #0a66c2;
+  font-size: 15px;
+  transition: background-color 0.2s linear, color 0.2s linear;
+}
+
+.profile-modal-btns > button:hover {
+  cursor: pointer;
+  background-color: #0a66c2;
+  color: #fff;
+}

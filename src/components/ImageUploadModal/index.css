@@ -1,0 +1,46 @@
+.image-upload-modal-container {
+  padding: 20px 24px;
+  width: 500px;
+  height: 300px;
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+  top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-heading {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.upload-image-input {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-image-input > label {
+  padding: 9px 15px;
+  border: 1px dashed rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.upload-photo-btn {
+  align-self: flex-end;
+  padding: 9px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.active-btn {
+  background-color: #0a66c2;
+  border-color: #0a66c2;
+  color: #fff;
+}

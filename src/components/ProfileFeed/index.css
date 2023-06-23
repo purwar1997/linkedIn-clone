@@ -13,7 +13,7 @@
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: 20px 24px;
+  padding: 24px;
   position: relative;
 }
 
@@ -27,6 +27,28 @@
   cursor: pointer;
 }
 
+.image-upload {
+  width: 160px;
+  height: 160px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.camera-icon {
+  font-size: 35px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
 .profile-info {
   display: flex;
   flex-direction: column;
@@ -34,7 +56,7 @@
 }
 
 .profile-info-top {
-  margin-top: 20px;
+  margin-top: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
