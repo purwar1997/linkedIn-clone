@@ -28,8 +28,8 @@
 }
 
 .image-upload {
-  width: 160px;
-  height: 160px;
+  width: 170px;
+  height: 170px;
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
   display: flex;
@@ -39,13 +39,13 @@
 }
 
 .profile-image {
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
 }
 
 .camera-icon {
-  font-size: 35px;
+  font-size: 40px;
   color: rgba(0, 0, 0, 0.5);
 }
 

@@ -15,7 +15,7 @@
   font-weight: 400;
 }
 
-.upload-image-input {
+.image-upload-input {
   flex: 1;
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@
   border-radius: 50%;
 }
 
-.upload-image-input > label {
+.image-upload-input > label {
   padding: 9px 15px;
   border: 1px dashed rgba(0, 0, 0, 0.5);
   color: rgba(0, 0, 0, 0.5);

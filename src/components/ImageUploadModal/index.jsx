@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import { toast } from 'react-toastify';
+import { Progress } from 'antd';
 import { uploadImageAPI } from '../../api/StorageApi';
 import './index.css';
 
 export default function ImageUploadModal({ currentUser, setImageUploadModal }) {
   const [profileImage, setProfileImage] = useState(null);
   const [imageURL, setImageURL] = useState('');
+  const [progress, setProgress] = useState(0);
 
   const closeModal = () => setImageUploadModal(false);
 
@@ -33,12 +35,15 @@ export default function ImageUploadModal({ currentUser, setImageUploadModal }) {
 
   const uploadImage = async () => {
     try {
-      await uploadImageAPI(currentUser.id, profileImage);
-      closeModal();
+      await uploadImageAPI(currentUser.id, profileImage, setProgress);
     } catch (err) {
       toast.error(err.message);
     }
   };
+
+  if (progress === 100) {
+    closeModal();
+  }
 
   return (
     <div className='modal-background' onClick={handleClick}>
@@ -47,8 +52,10 @@ export default function ImageUploadModal({ currentUser, setImageUploadModal }) {
 
         <h1 className='modal-heading'>Add Profile Image</h1>
 
-        <div className='upload-image-input'>
-          {imageURL ? (
+        <div className='image-upload-input'>
+          {progress > 0 ? (
+            <Progress type='circle' percent={Math.round(progress)} />
+          ) : imageURL ? (
             <img className='uploaded-image' src={imageURL} />
           ) : (
             <>

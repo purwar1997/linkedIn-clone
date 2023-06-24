@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 const usersRef = ref(storage, 'users');
 
-export const uploadImageAPI = async (userId, file) => {
+export const uploadImageAPI = async (userId, file, setProgress) => {
   const metadata = {
     name: file.name,
     size: file.size,
@@ -19,6 +19,7 @@ export const uploadImageAPI = async (userId, file) => {
     'state_changed',
     snapshot => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setProgress(progress);
     },
     err => toast.error(err.message),
     async () => {

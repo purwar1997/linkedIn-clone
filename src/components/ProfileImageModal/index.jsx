@@ -25,9 +25,9 @@ export default function ProfileImageModal({
   });
 
   const deleteImage = async () => {
-    await deleteImageAPI(currentUser.id, currentUser.profileImage);
-    closeModal();
     try {
+      await deleteImageAPI(currentUser.id, currentUser.profileImage);
+      closeModal();
     } catch (err) {
       toast.error(err.message);
     }
@@ -39,20 +39,19 @@ export default function ProfileImageModal({
         <div className='profile-modal-container'>
           <RxCross1 className='cross-btn' onClick={closeModal} />
 
-          <div className='profile-modal-body'>
-            <img src={currentUser.imageUrl} />
+          <img className='profile-modal-image' src={currentUser.imageUrl} />
 
-            <div className='profile-modal-btns'>
-              <button
-                onClick={() => {
-                  setProfileImageModal(false);
-                  setImageUploadModal(true);
-                }}
-              >
-                Change Image
-              </button>
-              <button onClick={deleteImage}>Delete</button>
-            </div>
+          <div className='profile-modal-btns'>
+            <button
+              onClick={() => {
+                setProfileImageModal(false);
+                setImageUploadModal(true);
+              }}
+            >
+              Change Image
+            </button>
+
+            <button onClick={deleteImage}>Delete</button>
           </div>
         </div>
       </div>

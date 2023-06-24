@@ -6,17 +6,14 @@
   border-radius: 10px;
   position: relative;
   top: 40px;
-}
-
-.profile-modal-body {
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
 }
 
-.profile-modal-body > img {
+.profile-modal-image {
+  margin-top: 20px;
   height: 180px;
   width: 180px;
   border-radius: 50%;
