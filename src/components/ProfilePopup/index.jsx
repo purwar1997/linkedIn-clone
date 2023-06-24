@@ -3,8 +3,13 @@ import { toast } from 'react-toastify';
 import { logoutAPI } from '../../api/AuthApi';
 import './index.css';
 
-export default function ProfilePopup({ currentUser }) {
+export default function ProfilePopup({ currentUser, closePopup }) {
   const navigate = useNavigate();
+
+  const viewProfile = () => {
+    navigate(`/profile/${currentUser.id}`);
+    closePopup();
+  };
 
   const signOut = async () => {
     try {
@@ -21,13 +26,9 @@ export default function ProfilePopup({ currentUser }) {
     <div className='popup-card'>
       <p className='name'>{currentUser.name}</p>
       <p className='bio'>{currentUser.headline}</p>
-      <div className='btn-group'>
-        <button className='popup-btn' onClick={() => navigate(`/profile/${currentUser.id}`)}>
-          View Profile
-        </button>
-        <button className='popup-btn' onClick={signOut}>
-          Sign Out
-        </button>
+      <div className='popup-card-btns'>
+        <button onClick={viewProfile}>View Profile</button>
+        <button onClick={signOut}>Sign Out</button>
       </div>
     </div>
   );

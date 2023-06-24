@@ -10,8 +10,41 @@
   gap: 15px;
 }
 
+.post-card-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.post-card-header > img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+
 .profile-link {
-  align-self: flex-start;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.profile-link:hover {
+  color: #0077b7;
+}
+
+.profile-headline {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+}
+
+.post-timestamp {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
 }
 
 .divider {
@@ -20,7 +53,7 @@
   background-color: rgba(0, 0, 0, 0.15);
 }
 
-.action-btns {
+.like-and-comment {
   display: flex;
   align-items: center;
   gap: 40px;

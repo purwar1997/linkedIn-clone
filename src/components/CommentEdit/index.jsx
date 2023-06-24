@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { DateTime } from 'luxon';
 import { toast } from 'react-toastify';
 import { editCommentAPI } from '../../api/FirestoreApi';
 import './index.css';
@@ -11,7 +10,7 @@ export default function CommentEdit({ comment, setIsEdit }) {
     try {
       await editCommentAPI(comment.id, {
         text: commentText,
-        updatedAt: DateTime.now().toJSDate(),
+        updatedAt: new Date(),
       });
 
       setIsEdit(false);

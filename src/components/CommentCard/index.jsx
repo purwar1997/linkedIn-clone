@@ -7,7 +7,7 @@ import { deleteCommentAPI } from '../../api/FirestoreApi';
 import CommentEdit from '../CommentEdit';
 import './index.css';
 
-export default function CommentCard({ comment }) {
+export default function CommentCard({ comment, commentedBy }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
@@ -24,47 +24,51 @@ export default function CommentCard({ comment }) {
   };
 
   return (
-    <div className='comment-card'>
-      <div className='comment-header'>
-        <Link to={`/profile/${comment.addedBy.userId}`}>{comment.addedBy.username}</Link>
+    <div className='comment'>
+      <img src={commentedBy.imageUrl} alt={commentedBy.name} />
 
-        {comment.addedBy.isAuthor && (
-          <>
-            <span className='comment-author'>Author</span>
+      <div className='comment-card'>
+        <div className='comment-card-header'>
+          <Link to={`/profile/${commentedBy.id}`}>{commentedBy.name}</Link>
 
-            {!isEdit && (
-              <BsThreeDots className='three-dots' onClick={() => setIsPopupOpen(!isPopupOpen)} />
-            )}
-          </>
+          {comment.addedByAuthor && (
+            <>
+              <span className='comment-author'>Author</span>
+
+              {!isEdit && (
+                <BsThreeDots className='three-dots' onClick={() => setIsPopupOpen(!isPopupOpen)} />
+              )}
+            </>
+          )}
+        </div>
+
+        <p className='comment-headline'>{formatHeadline(commentedBy.headline)}</p>
+
+        {isEdit ? (
+          <CommentEdit comment={comment} setIsEdit={setIsEdit} />
+        ) : (
+          <p className='comment-text'>{comment.text}</p>
+        )}
+
+        {isPopupOpen && (
+          <div className='comment-popup'>
+            <div
+              onClick={() => {
+                setIsPopupOpen(false);
+                setIsEdit(true);
+              }}
+            >
+              <FaPen />
+              <span>Edit</span>
+            </div>
+
+            <div onClick={deleteComment}>
+              <FaTrashAlt />
+              <span>Delete</span>
+            </div>
+          </div>
         )}
       </div>
-
-      <p className='comment-headline'>{formatHeadline(comment.addedBy.headline)}</p>
-
-      {isEdit ? (
-        <CommentEdit comment={comment} setIsEdit={setIsEdit} />
-      ) : (
-        <p className='comment-text'>{comment.text}</p>
-      )}
-
-      {isPopupOpen && (
-        <div className='comment-popup'>
-          <div
-            onClick={() => {
-              setIsPopupOpen(false);
-              setIsEdit(true);
-            }}
-          >
-            <FaPen />
-            <span>Edit</span>
-          </div>
-
-          <div onClick={deleteComment}>
-            <FaTrashAlt />
-            <span>Delete</span>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

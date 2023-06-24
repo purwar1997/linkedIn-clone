@@ -113,9 +113,9 @@ export default function ProfileFeed({ currentUser, profileId }) {
 
       <div className='posts'>
         {posts
-          .filter(post => post.createdBy.id === profileId)
+          .filter(post => post.userId === profileId)
           .map(post => (
-            <PostCard key={post.id} post={post} currentUser={currentUser} />
+            <PostCard key={post.id} post={post} currentUser={currentUser} postedBy={profile} />
           ))}
       </div>
     </div>

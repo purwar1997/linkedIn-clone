@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { DateTime } from 'luxon';
 import { toast } from 'react-toastify';
-import { getCommentsAPI, addCommentAPI } from '../../api/FirestoreApi';
+import { getCommentsAPI, addCommentAPI, getUsersAPI } from '../../api/FirestoreApi';
 import CommentCard from '../CommentCard';
 import './index.css';
 
 export default function CommentBox({ post, currentUser }) {
   const [postComments, setPostComments] = useState([]);
   const [comment, setComment] = useState('');
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const getComments = async () => {
@@ -19,6 +19,16 @@ export default function CommentBox({ post, currentUser }) {
     };
 
     getComments();
+
+    const getUsers = async () => {
+      try {
+        await getUsersAPI(setUsers);
+      } catch (err) {
+        toast.error(err.message);
+      }
+    };
+
+    getUsers();
   }, []);
 
   const addComment = async () => {
@@ -26,13 +36,9 @@ export default function CommentBox({ post, currentUser }) {
       const commentInfo = {
         text: comment.trim(),
         postId: post.id,
-        addedBy: {
-          userId: currentUser.id,
-          username: currentUser.name,
-          headline: currentUser.headline,
-          isAuthor: currentUser.id === post.createdBy.id,
-        },
-        createdAt: DateTime.now().toJSDate(),
+        userId: currentUser.id,
+        addedByAuthor: currentUser.id === post.userId,
+        createdAt: new Date(),
       };
 
       await addCommentAPI(commentInfo);
@@ -45,6 +51,8 @@ export default function CommentBox({ post, currentUser }) {
   return (
     <div className='comment-box'>
       <div className='add-comment-form'>
+        <img src={currentUser.imageUrl} alt={currentUser.name} />
+
         <input
           type='text'
           name='comment'
@@ -67,7 +75,11 @@ export default function CommentBox({ post, currentUser }) {
       {postComments.length > 0 && (
         <div className='comments'>
           {postComments.map(comment => (
-            <CommentCard key={comment.id} comment={comment} />
+            <CommentCard
+              key={comment.id}
+              comment={comment}
+              commentedBy={users.find(user => user.id === comment.userId)}
+            />
           ))}
         </div>
       )}

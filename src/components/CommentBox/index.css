@@ -5,7 +5,13 @@
 .add-comment-form {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+}
+
+.add-comment-form > img {
+  height: 46px;
+  width: 46px;
+  border-radius: 50%;
 }
 
 .add-comment-form > input {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { getPostsAPI } from '../../api/FirestoreApi';
+import { getUsersAPI, getPostsAPI } from '../../api/FirestoreApi';
 import Modal from '../Modal/index';
 import PostCard from '../PostCard/index';
 import topbarLogo from '../../assets/topbarLogo.png';
@@ -9,6 +9,7 @@ import './index.css';
 export default function UserFeed({ currentUser }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const getPosts = async () => {
@@ -20,15 +21,26 @@ export default function UserFeed({ currentUser }) {
     };
 
     getPosts();
+
+    const getUsers = async () => {
+      try {
+        await getUsersAPI(setUsers);
+      } catch (err) {
+        toast.error(err.message);
+      }
+    };
+
+    getUsers();
   }, []);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div className='user-feed'>
+    <div className='userfeed'>
       <div className='create-post-card'>
-        <img className='user-image' src={topbarLogo} />
+        <img src={currentUser.imageUrl} alt={currentUser.name} />
+
         <button className='open-modal-btn' onClick={openModal}>
           Start a post
         </button>
@@ -36,11 +48,18 @@ export default function UserFeed({ currentUser }) {
 
       {isModalOpen && <Modal closeModal={closeModal} currentUser={currentUser} />}
 
-      <div className='posts'>
-        {posts.map(post => (
-          <PostCard key={post.id} post={post} currentUser={currentUser} />
-        ))}
-      </div>
+      {posts.length > 0 && (
+        <div className='posts'>
+          {posts.map(post => (
+            <PostCard
+              key={post.id}
+              post={post}
+              currentUser={currentUser}
+              postedBy={users.find(user => user.id === post.userId)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

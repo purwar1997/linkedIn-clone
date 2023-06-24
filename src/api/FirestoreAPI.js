@@ -28,6 +28,13 @@ export const createUserAPI = async (userId, name, email) => {
   }
 };
 
+export const getUsersAPI = async setUsers => {
+  onSnapshot(usersRef, snapshot => {
+    const users = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setUsers(users);
+  });
+};
+
 export const getCurrentUserAPI = async (userId, setCurrentUser) => {
   const docRef = doc(db, 'users', userId);
   const docSnap = await getDoc(docRef);
@@ -57,9 +64,10 @@ export const getProfileAPI = async (profileId, setProfile) => {
 };
 
 export const updateProfileAPI = async (userId, updates) => {
-  for (const key in updates) {
-    updates[key] = updates[key].trim();
-  }
+  // for (const [key, value] of Object.entries(updates)) {
+  //   console.log(value, typeof value);
+  //   updates[key] = value.trim();
+  // }
 
   for (const [key, value] of Object.entries(updates)) {
     if (!value) {

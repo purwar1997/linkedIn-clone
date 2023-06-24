@@ -7,7 +7,7 @@ import { manageLikesAPI } from '../../api/FirestoreApi';
 import CommentBox from '../CommentBox';
 import './index.css';
 
-export default function PostCard({ post, currentUser }) {
+export default function PostCard({ post, currentUser, postedBy }) {
   const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false);
 
   const postLiked = post.likedBy && post.likedBy.includes(currentUser.id);
@@ -22,11 +22,21 @@ export default function PostCard({ post, currentUser }) {
 
   return (
     <div className='post-card'>
-      <Link className='profile-link' to={`/profile/${post.createdBy.id}`}>
-        {post.createdBy.name}
-      </Link>
+      <div className='post-card-header'>
+        <img src={postedBy.imageUrl} alt={postedBy.name} />
 
-      <p>{post.content}</p>
+        <div className='profile-details'>
+          <Link className='profile-link' to={`/profile/${postedBy.id}`}>
+            {postedBy.name}
+          </Link>
+
+          <p className='profile-headline'>{postedBy.headline}</p>
+
+          <span className='post-timestamp'>Time duration</span>
+        </div>
+      </div>
+
+      <p className='post-content'>{post.content}</p>
 
       <p>
         {post.likedBy?.length ?? 0} {post.likedBy?.length === 1 ? 'Like' : 'Likes'}
@@ -34,7 +44,7 @@ export default function PostCard({ post, currentUser }) {
 
       <div className='divider' />
 
-      <div className='action-btns'>
+      <div className='like-and-comment'>
         <div className={`like-btn ${postLiked ? 'liked' : ''}`} onClick={manageLikes}>
           {postLiked ? (
             <AiFillLike className='unlike-icon' />

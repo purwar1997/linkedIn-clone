@@ -1,3 +1,15 @@
+.comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.comment > img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
 .comment-card {
   width: 100%;
   background-color: #f2f2f2;
@@ -9,18 +21,18 @@
   position: relative;
 }
 
-.comment-header {
+.comment-card-header {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.comment-header > a {
+.comment-card-header > a {
   font-weight: 500;
   color: rgba(0, 0, 0, 0.7);
 }
 
-.comment-header > a:hover {
+.comment-card-header > a:hover {
   color: #0a66c2;
 }
 
@@ -28,7 +40,7 @@
   color: #fff;
   background-color: #56687a;
   font-size: 12px;
-  padding: 2px 7px;
+  padding: 2px 8px;
   border-radius: 3px;
 }
 
@@ -42,8 +54,8 @@
 .comment-headline {
   position: relative;
   bottom: 5px;
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.7);
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .comment-popup {

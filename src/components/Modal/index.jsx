@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import { toast } from 'react-toastify';
-import { DateTime } from 'luxon';
 import { createPostAPI } from '../../api/FirestoreApi';
 import './index.css';
 
@@ -24,8 +23,8 @@ export default function Modal({ closeModal, currentUser }) {
     try {
       await createPostAPI({
         content: post.trim(),
-        createdAt: DateTime.now().toJSDate(),
-        createdBy: currentUser,
+        userId: currentUser.id,
+        createdAt: new Date(),
       });
 
       closeModal();

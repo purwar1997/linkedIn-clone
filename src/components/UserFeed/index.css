@@ -1,4 +1,4 @@
-.user-feed {
+.userfeed {
   padding: 30px 100px;
   display: flex;
   flex-direction: column;
@@ -15,12 +15,13 @@
   border-radius: 10px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   padding-inline: 30px;
 }
 
-.user-image {
-  width: 50px;
+.create-post-card > img {
+  height: 55px;
+  width: 55px;
   border-radius: 50%;
 }
 

@@ -26,21 +26,22 @@ export default function Topbar({ currentUser }) {
         <AiOutlineSearch className='search-icon' />
       </form>
 
-      <div className='react-icons'>
+      <div className='topbar-icons'>
         <Link to='/'>
-          <AiFillHome className='react-icon' />
+          <AiFillHome className='topbar-icon' />
         </Link>
-        <HiUsers className='react-icon' />
-        <BsBriefcaseFill className='react-icon' />
-        <MdMessage className='react-icon' />
-        <MdNotifications className='react-icon' />
-        <FaUserCircle
-          className='react-icon'
+        <HiUsers className='topbar-icon' />
+        <BsBriefcaseFill className='topbar-icon' />
+        <MdMessage className='topbar-icon' />
+        <MdNotifications className='topbar-icon' />
+        <img
+          src={currentUser.imageUrl}
+          className='profile-icon'
           onClick={() => (isPopupOpen ? closePopup() : openPopup())}
         />
       </div>
 
-      {isPopupOpen && <ProfilePopup currentUser={currentUser} />}
+      {isPopupOpen && <ProfilePopup currentUser={currentUser} closePopup={closePopup} />}
     </div>
   );
 }
