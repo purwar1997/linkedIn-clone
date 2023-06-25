@@ -1,6 +1,4 @@
 export const getTimestamp = date => {
-  console.log(date.toDate());
-
   const previousDate = date.toMillis();
   const currentDate = Date.now();
 
