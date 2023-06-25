@@ -4,6 +4,7 @@ import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 import { BiCommentDetail } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 import { manageLikesAPI } from '../../api/FirestoreApi';
+import { getTimestamp } from '../../utils/getTimestamp';
 import CommentBox from '../CommentBox';
 import placeholderAvatar from '../../assets/placeholder.png';
 import './index.css';
@@ -33,7 +34,7 @@ export default function PostCard({ post, currentUser, postedBy }) {
 
           <p className='profile-headline'>{postedBy.headline}</p>
 
-          <span className='post-timestamp'>Time duration</span>
+          <span className='post-timestamp'>{getTimestamp(post.createdAt)}</span>
         </div>
       </div>
 

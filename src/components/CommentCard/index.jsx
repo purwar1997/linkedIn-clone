@@ -4,6 +4,7 @@ import { BsThreeDots } from 'react-icons/bs';
 import { FaTrashAlt, FaPen } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { deleteCommentAPI } from '../../api/FirestoreApi';
+import { getTimestamp } from '../../utils/getTimestamp';
 import CommentEdit from '../CommentEdit';
 import placeholderAvatar from '../../assets/placeholder.png';
 import './index.css';
@@ -41,6 +42,11 @@ export default function CommentCard({ comment, commentedBy }) {
               )}
             </>
           )}
+
+          <span className='comment-timestamp'>
+            {getTimestamp(comment?.updatedAt || comment.createdAt)}{' '}
+            {comment.updatedAt && '(edited)'}
+          </span>
         </div>
 
         <p className='comment-headline'>{formatHeadline(commentedBy.headline)}</p>

@@ -44,6 +44,14 @@
   border-radius: 3px;
 }
 
+.comment-timestamp {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  align-self: flex-start;
+  position: absolute;
+  right: 45px;
+}
+
 .three-dots {
   align-self: flex-start;
   position: absolute;
