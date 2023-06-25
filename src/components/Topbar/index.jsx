@@ -6,7 +6,8 @@ import { BsBriefcaseFill } from 'react-icons/bs';
 import { MdMessage, MdNotifications } from 'react-icons/md';
 import { FaUserCircle } from 'react-icons/fa';
 import ProfilePopup from '../ProfilePopup';
-import TopbarLogo from '../../assets/topbarLogo.png';
+import topbarLogo from '../../assets/topbarLogo.png';
+
 import './index.css';
 
 export default function Topbar({ currentUser }) {
@@ -18,7 +19,7 @@ export default function Topbar({ currentUser }) {
   return (
     <div className='topbar'>
       <Link to='/'>
-        <img className='topbar-logo' src={TopbarLogo} alt='topbar-logo' />
+        <img className='topbar-logo' src={topbarLogo} alt='topbar-logo' />
       </Link>
 
       <form className='search-form'>
@@ -34,11 +35,15 @@ export default function Topbar({ currentUser }) {
         <BsBriefcaseFill className='topbar-icon' />
         <MdMessage className='topbar-icon' />
         <MdNotifications className='topbar-icon' />
-        <img
-          src={currentUser.imageUrl}
-          className='profile-icon'
-          onClick={() => (isPopupOpen ? closePopup() : openPopup())}
-        />
+        {currentUser.imageUrl ? (
+          <img
+            src={currentUser.imageUrl}
+            className='profile-icon'
+            onClick={() => (isPopupOpen ? closePopup() : openPopup())}
+          />
+        ) : (
+          <FaUserCircle className='topbar-icon' />
+        )}
       </div>
 
       {isPopupOpen && <ProfilePopup currentUser={currentUser} closePopup={closePopup} />}

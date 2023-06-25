@@ -5,6 +5,7 @@ import { BiCommentDetail } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 import { manageLikesAPI } from '../../api/FirestoreApi';
 import CommentBox from '../CommentBox';
+import placeholderAvatar from '../../assets/placeholder.png';
 import './index.css';
 
 export default function PostCard({ post, currentUser, postedBy }) {
@@ -23,7 +24,7 @@ export default function PostCard({ post, currentUser, postedBy }) {
   return (
     <div className='post-card'>
       <div className='post-card-header'>
-        <img src={postedBy.imageUrl} alt={postedBy.name} />
+        <img src={postedBy.imageUrl || placeholderAvatar} alt={postedBy.name} />
 
         <div className='profile-details'>
           <Link className='profile-link' to={`/profile/${postedBy.id}`}>

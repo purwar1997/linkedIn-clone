@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { getCommentsAPI, addCommentAPI, getUsersAPI } from '../../api/FirestoreApi';
 import CommentCard from '../CommentCard';
+import placeholderAvatar from '../../assets/placeholder.png';
 import './index.css';
 
 export default function CommentBox({ post, currentUser }) {
@@ -51,7 +52,7 @@ export default function CommentBox({ post, currentUser }) {
   return (
     <div className='comment-box'>
       <div className='add-comment-form'>
-        <img src={currentUser.imageUrl} alt={currentUser.name} />
+        <img src={currentUser.imageUrl || placeholderAvatar} alt={currentUser.name} />
 
         <input
           type='text'

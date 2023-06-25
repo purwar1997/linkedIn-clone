@@ -64,11 +64,6 @@ export const getProfileAPI = async (profileId, setProfile) => {
 };
 
 export const updateProfileAPI = async (userId, updates) => {
-  // for (const [key, value] of Object.entries(updates)) {
-  //   console.log(value, typeof value);
-  //   updates[key] = value.trim();
-  // }
-
   for (const [key, value] of Object.entries(updates)) {
     if (!value) {
       delete updates[key];

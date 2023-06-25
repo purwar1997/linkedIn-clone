@@ -5,6 +5,7 @@ import { FaTrashAlt, FaPen } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { deleteCommentAPI } from '../../api/FirestoreApi';
 import CommentEdit from '../CommentEdit';
+import placeholderAvatar from '../../assets/placeholder.png';
 import './index.css';
 
 export default function CommentCard({ comment, commentedBy }) {
@@ -25,7 +26,7 @@ export default function CommentCard({ comment, commentedBy }) {
 
   return (
     <div className='comment'>
-      <img src={commentedBy.imageUrl} alt={commentedBy.name} />
+      <img src={commentedBy.imageUrl || placeholderAvatar} alt={commentedBy.name} />
 
       <div className='comment-card'>
         <div className='comment-card-header'>

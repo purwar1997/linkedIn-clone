@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { getUsersAPI, getPostsAPI } from '../../api/FirestoreApi';
 import Modal from '../Modal/index';
 import PostCard from '../PostCard/index';
-import topbarLogo from '../../assets/topbarLogo.png';
+import placeholderAvatar from '../../assets/placeholder.png';
 import './index.css';
 
 export default function UserFeed({ currentUser }) {
@@ -39,7 +39,7 @@ export default function UserFeed({ currentUser }) {
   return (
     <div className='userfeed'>
       <div className='create-post-card'>
-        <img src={currentUser.imageUrl} alt={currentUser.name} />
+        <img src={currentUser.imageUrl || placeholderAvatar} alt={currentUser.name} />
 
         <button className='open-modal-btn' onClick={openModal}>
           Start a post

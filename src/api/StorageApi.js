@@ -1,6 +1,6 @@
 import { storage, db } from '../config/firebase';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
-import { doc, getDoc, updateDoc, Timestamp } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
 const usersRef = ref(storage, 'users');
@@ -42,7 +42,6 @@ export const uploadImageAPI = async (userId, file, setProgress) => {
       await updateDoc(docRef, {
         profileImage: file.name,
         imageUrl: downloadURL,
-        updatedAt: Timestamp.fromDate(new Date()),
       });
     }
   );
@@ -65,6 +64,5 @@ export const deleteImageAPI = async (userId, image) => {
     ...user,
     profileImage: null,
     imageUrl: null,
-    updatedAt: Timestamp.fromDate(new Date()),
   });
 };
