@@ -90,6 +90,49 @@ export const updateProfileAPI = async (userId, updates) => {
   await updateDoc(docRef, updates);
 };
 
+export const saveOrUnsavePostAPI = async (userId, postId, action) => {
+  let docRef = doc(db, 'posts', postId);
+  let docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error('Post not found');
+  }
+
+  docRef = doc(db, 'users', userId);
+  docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error('User not found');
+  }
+
+  const user = { id: docSnap.id, ...docSnap.data() };
+
+  switch (action) {
+    case 'save': {
+      if (user.savedPosts?.includes(postId)) {
+        throw new Error('You have already saved this post');
+      }
+
+      user.savedPosts = user.savedPosts ? [...user.savedPosts, postId] : [postId];
+      break;
+    }
+
+    case 'unsave': {
+      if (!user.savedPosts.includes(postId)) {
+        throw new Error('You have already unsaved this post');
+      }
+
+      user.savedPosts = user.savedPosts.filter(savedPostId => savedPostId !== postId);
+      break;
+    }
+  }
+
+  await updateDoc(docRef, {
+    ...user,
+    updatedAt: new Date(),
+  });
+};
+
 // Posts collection
 export const createPostAPI = async postData => {
   const docRef = await addDoc(postsRef, postData);
@@ -142,11 +185,19 @@ export const manageLikesAPI = async (postId, userId, action) => {
 
   switch (action) {
     case 'like': {
+      if (post.likedBy?.includes(userId)) {
+        throw new Error('You have already liked this post');
+      }
+
       post.likedBy = post.likedBy ? [...post.likedBy, userId] : [userId];
       break;
     }
 
     case 'unlike': {
+      if (!post.likedBy.includes(userId)) {
+        throw new Error('You have already unliked this post');
+      }
+
       post.likedBy = post.likedBy.filter(likedUserId => likedUserId !== userId);
       break;
     }

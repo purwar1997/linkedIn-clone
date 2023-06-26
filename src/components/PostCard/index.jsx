@@ -50,6 +50,7 @@ export default function PostCard({ post, currentUser, postedBy }) {
           <PostPopup
             closePopup={() => setIsPopupOpen(false)}
             openModal={() => setIsModalOpen(true)}
+            currentUser={currentUser}
             postId={post.id}
           />
         )}
