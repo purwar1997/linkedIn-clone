@@ -9,7 +9,7 @@ export default function CommentEdit({ comment, setIsEdit }) {
   const editComment = async () => {
     try {
       await editCommentAPI(comment.id, {
-        text: commentText,
+        text: commentText.trim(),
         updatedAt: new Date(),
       });
 
@@ -31,8 +31,8 @@ export default function CommentEdit({ comment, setIsEdit }) {
 
       <div className='edit-comment-btns'>
         <button
-          id={commentText === comment.text ? '' : 'save-changes-btn'}
-          disabled={commentText === comment.text}
+          id={commentText === comment.text || commentText.trim() === '' ? '' : 'save-changes-btn'}
+          disabled={commentText === comment.text || commentText.trim() === ''}
           onClick={editComment}
         >
           Save Changes

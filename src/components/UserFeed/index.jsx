@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { getUsersAPI, getPostsAPI } from '../../api/FirestoreApi';
-import Modal from '../Modal/index';
-import PostCard from '../PostCard/index';
+import PostModal from '../PostModal';
+import PostCard from '../PostCard';
 import placeholderAvatar from '../../assets/placeholder.png';
 import './index.css';
 
@@ -33,20 +33,19 @@ export default function UserFeed({ currentUser }) {
     getUsers();
   }, []);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
   return (
     <div className='userfeed'>
       <div className='create-post-card'>
         <img src={currentUser.imageUrl || placeholderAvatar} alt={currentUser.name} />
 
-        <button className='open-modal-btn' onClick={openModal}>
+        <button className='open-modal-btn' onClick={() => setIsModalOpen(true)}>
           Start a post
         </button>
       </div>
 
-      {isModalOpen && <Modal closeModal={closeModal} currentUser={currentUser} />}
+      {isModalOpen && (
+        <PostModal closeModal={() => setIsModalOpen(false)} currentUser={currentUser} />
+      )}
 
       {posts.length > 0 && (
         <div className='posts'>

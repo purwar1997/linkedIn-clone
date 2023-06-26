@@ -1,6 +1,6 @@
 import { storage, db } from '../config/firebase';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, deleteField } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
 const usersRef = ref(storage, 'users');
@@ -62,7 +62,7 @@ export const deleteImageAPI = async (userId, image) => {
 
   await updateDoc(docRef, {
     ...user,
-    profileImage: null,
-    imageUrl: null,
+    profileImage: deleteField(),
+    imageUrl: deleteField(),
   });
 };

@@ -19,7 +19,6 @@ export default function CommentCard({ comment, commentedBy }) {
   const deleteComment = async () => {
     try {
       await deleteCommentAPI(comment.id);
-      setIsPopupOpen(false);
     } catch (err) {
       toast.error(err.message);
     }
@@ -38,7 +37,9 @@ export default function CommentCard({ comment, commentedBy }) {
               <span className='comment-author'>Author</span>
 
               {!isEdit && (
-                <BsThreeDots className='three-dots' onClick={() => setIsPopupOpen(!isPopupOpen)} />
+                <span className='comment-popup-icon' onClick={() => setIsPopupOpen(!isPopupOpen)}>
+                  <BsThreeDots />
+                </span>
               )}
             </>
           )}
@@ -58,8 +59,9 @@ export default function CommentCard({ comment, commentedBy }) {
         )}
 
         {isPopupOpen && (
-          <div className='comment-popup'>
+          <div className='popup'>
             <div
+              className='popup-item'
               onClick={() => {
                 setIsPopupOpen(false);
                 setIsEdit(true);
@@ -69,7 +71,7 @@ export default function CommentCard({ comment, commentedBy }) {
               <span>Edit</span>
             </div>
 
-            <div onClick={deleteComment}>
+            <div className='popup-item' onClick={deleteComment}>
               <FaTrashAlt />
               <span>Delete</span>
             </div>

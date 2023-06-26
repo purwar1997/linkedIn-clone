@@ -2,15 +2,20 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 import { BiCommentDetail } from 'react-icons/bi';
+import { BsThreeDots } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import { manageLikesAPI } from '../../api/FirestoreApi';
 import { getTimestamp } from '../../utils/getTimestamp';
 import CommentBox from '../CommentBox';
+import PostPopup from '../PostPopup';
+import PostModal from '../PostModal';
 import placeholderAvatar from '../../assets/placeholder.png';
 import './index.css';
 
 export default function PostCard({ post, currentUser, postedBy }) {
   const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const postLiked = post.likedBy && post.likedBy.includes(currentUser.id);
 
@@ -36,6 +41,20 @@ export default function PostCard({ post, currentUser, postedBy }) {
 
           <span className='post-timestamp'>{getTimestamp(post.createdAt)}</span>
         </div>
+
+        <span className='post-popup-icon' onClick={() => setIsPopupOpen(!isPopupOpen)}>
+          <BsThreeDots className='three-dots' />
+        </span>
+
+        {isPopupOpen && (
+          <PostPopup
+            closePopup={() => setIsPopupOpen(false)}
+            openModal={() => setIsModalOpen(true)}
+            postId={post.id}
+          />
+        )}
+
+        {isModalOpen && <PostModal closeModal={() => setIsModalOpen(false)} post={post} />}
       </div>
 
       <p className='post-content'>{post.content}</p>

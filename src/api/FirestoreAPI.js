@@ -108,6 +108,28 @@ export const getPostsAPI = async setPosts => {
   });
 };
 
+export const editPostAPI = async (postId, updates) => {
+  const docRef = doc(db, 'posts', postId);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error('Post not found');
+  }
+
+  await updateDoc(docRef, updates);
+};
+
+export const deletePostAPI = async postId => {
+  const docRef = doc(db, 'posts', postId);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error('Post not found');
+  }
+
+  await deleteDoc(docRef);
+};
+
 export const manageLikesAPI = async (postId, userId, action) => {
   const docRef = doc(db, 'posts', postId);
   const docSnap = await getDoc(docRef);
