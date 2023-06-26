@@ -4,12 +4,12 @@ import { toast } from 'react-toastify';
 import { deletePostAPI, saveOrUnsavePostAPI } from '../../api/FirestoreApi';
 import './index.css';
 
-export default function PostPopup({ closePopup, openModal, currentUser, postId }) {
-  const postSaved = currentUser.savedPosts?.includes(postId);
+export default function PostPopup({ closePopup, openModal, currentUser, post }) {
+  const postSaved = currentUser.savedPosts?.includes(post.id);
 
   const saveOrUnsavePost = async () => {
     try {
-      await saveOrUnsavePostAPI(currentUser.id, postId, postSaved ? 'unsave' : 'save');
+      await saveOrUnsavePostAPI(currentUser.id, post.id, postSaved ? 'unsave' : 'save');
       closePopup();
     } catch (err) {
       toast.error(err.message);
@@ -18,7 +18,7 @@ export default function PostPopup({ closePopup, openModal, currentUser, postId }
 
   const deletePost = async () => {
     try {
-      await deletePostAPI(postId);
+      await deletePostAPI(post.id);
     } catch (err) {
       toast.error(err.message);
     }
@@ -31,21 +31,25 @@ export default function PostPopup({ closePopup, openModal, currentUser, postId }
         <span>{postSaved ? 'Unsave' : 'Save'} post</span>
       </div>
 
-      <div
-        className='popup-item'
-        onClick={() => {
-          closePopup();
-          openModal();
-        }}
-      >
-        <FaPen />
-        <span>Edit post</span>
-      </div>
+      {post.userId === currentUser.id && (
+        <>
+          <div
+            className='popup-item'
+            onClick={() => {
+              closePopup();
+              openModal();
+            }}
+          >
+            <FaPen />
+            <span>Edit post</span>
+          </div>
 
-      <div className='popup-item' onClick={deletePost}>
-        <FaTrashAlt />
-        <span>Delete post</span>
-      </div>
+          <div className='popup-item' onClick={deletePost}>
+            <FaTrashAlt />
+            <span>Delete post</span>
+          </div>
+        </>
+      )}
     </div>
   );
 }

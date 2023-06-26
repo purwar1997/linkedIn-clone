@@ -9,9 +9,9 @@ import CommentEdit from '../CommentEdit';
 import placeholderAvatar from '../../assets/placeholder.png';
 import './index.css';
 
-export default function CommentCard({ comment, commentedBy }) {
+export default function CommentCard({ comment, commentedBy, currentUser }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
+  const [editComment, setEditComment] = useState(false);
 
   const formatHeadline = headline =>
     headline.length > 120 ? `${headline.slice(0, 120)}...` : headline;
@@ -32,28 +32,26 @@ export default function CommentCard({ comment, commentedBy }) {
         <div className='comment-card-header'>
           <Link to={`/profile/${commentedBy.id}`}>{commentedBy.name}</Link>
 
-          {comment.addedByAuthor && (
-            <>
-              <span className='comment-author'>Author</span>
+          {comment.addedByAuthor && <span className='comment-author'>Author</span>}
 
-              {!isEdit && (
-                <span className='comment-popup-icon' onClick={() => setIsPopupOpen(!isPopupOpen)}>
-                  <BsThreeDots />
-                </span>
-              )}
-            </>
+          {comment.userId === currentUser.id && !editComment && (
+            <span className='comment-popup-icon' onClick={() => setIsPopupOpen(!isPopupOpen)}>
+              <BsThreeDots />
+            </span>
           )}
 
-          <span className='comment-timestamp'>
-            {getTimestamp(comment?.updatedAt || comment.createdAt)}{' '}
-            {comment.updatedAt && '(edited)'}
-          </span>
+          {!editComment && (
+            <span className='comment-timestamp'>
+              {getTimestamp(comment?.updatedAt || comment.createdAt)}{' '}
+              {comment.updatedAt && '(edited)'}
+            </span>
+          )}
         </div>
 
         <p className='comment-headline'>{formatHeadline(commentedBy.headline)}</p>
 
-        {isEdit ? (
-          <CommentEdit comment={comment} setIsEdit={setIsEdit} />
+        {editComment ? (
+          <CommentEdit comment={comment} setEditComment={setEditComment} />
         ) : (
           <p className='comment-text'>{comment.text}</p>
         )}
@@ -64,7 +62,7 @@ export default function CommentCard({ comment, commentedBy }) {
               className='popup-item'
               onClick={() => {
                 setIsPopupOpen(false);
-                setIsEdit(true);
+                setEditComment(true);
               }}
             >
               <FaPen />

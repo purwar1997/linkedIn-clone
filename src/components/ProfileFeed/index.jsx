@@ -17,6 +17,12 @@ export default function ProfileFeed({ currentUser, profileId }) {
 
   const onEdit = () => setIsEdit(!isEdit);
 
+  const handleClick = () => {
+    if (profileId === currentUser.id) {
+      profile.imageUrl ? setProfileImageModal(true) : setImageUploadModal(true);
+    }
+  };
+
   useEffect(() => {
     const getProfile = async () => {
       try {
@@ -52,14 +58,9 @@ export default function ProfileFeed({ currentUser, profileId }) {
           </button>
         )}
 
-        <div
-          className='image-upload'
-          onClick={() =>
-            currentUser.imageUrl ? setProfileImageModal(true) : setImageUploadModal(true)
-          }
-        >
-          {currentUser.imageUrl ? (
-            <img className='profile-image' src={currentUser.imageUrl} />
+        <div className='image-upload' onClick={handleClick}>
+          {profile.imageUrl ? (
+            <img className='profile-image' src={profile.imageUrl} />
           ) : (
             <BsCameraFill className='camera-icon' />
           )}
@@ -115,7 +116,7 @@ export default function ProfileFeed({ currentUser, profileId }) {
         {posts
           .filter(post => post.userId === profileId)
           .map(post => (
-            <PostCard key={post.id} post={post} currentUser={currentUser} postedBy={profile} />
+            <PostCard key={post.id} post={post} postedBy={profile} currentUser={currentUser} />
           ))}
       </div>
     </div>

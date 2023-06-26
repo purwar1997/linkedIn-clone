@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { editCommentAPI } from '../../api/FirestoreApi';
 import './index.css';
 
-export default function CommentEdit({ comment, setIsEdit }) {
+export default function CommentEdit({ comment, setEditComment }) {
   const [commentText, setCommentText] = useState(comment.text);
 
   const editComment = async () => {
@@ -13,7 +13,7 @@ export default function CommentEdit({ comment, setIsEdit }) {
         updatedAt: new Date(),
       });
 
-      setIsEdit(false);
+      setEditComment(false);
     } catch (err) {
       toast.error(err.message);
     }
@@ -38,7 +38,7 @@ export default function CommentEdit({ comment, setIsEdit }) {
           Save Changes
         </button>
 
-        <button onClick={() => setIsEdit(false)}>Cancel</button>
+        <button onClick={() => setEditComment(false)}>Cancel</button>
       </div>
     </div>
   );

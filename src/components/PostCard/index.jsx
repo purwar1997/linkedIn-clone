@@ -12,7 +12,7 @@ import PostModal from '../PostModal';
 import placeholderAvatar from '../../assets/placeholder.png';
 import './index.css';
 
-export default function PostCard({ post, currentUser, postedBy }) {
+export default function PostCard({ post, postedBy, currentUser }) {
   const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,7 +51,7 @@ export default function PostCard({ post, currentUser, postedBy }) {
             closePopup={() => setIsPopupOpen(false)}
             openModal={() => setIsModalOpen(true)}
             currentUser={currentUser}
-            postId={post.id}
+            post={post}
           />
         )}
 

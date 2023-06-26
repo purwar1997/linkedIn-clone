@@ -80,6 +80,7 @@ export default function CommentBox({ post, currentUser }) {
               key={comment.id}
               comment={comment}
               commentedBy={users.find(user => user.id === comment.userId)}
+              currentUser={currentUser}
             />
           ))}
         </div>
